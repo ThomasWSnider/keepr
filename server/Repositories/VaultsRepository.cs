@@ -48,9 +48,20 @@ public class VaultsRepository : IRepository<Vault>
     return vault;
   }
 
-  public Vault Update(Vault data)
+  public Vault Update(Vault vaultToUpdate)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    UPDATE vaults
+    SET name = @Name, description = @Description, img = @Img, isPrivate = @IsPrivate
+    WHERE id = @Id LIMIT 1;
+    
+    SELECT vaults.*, accounts.*
+    FROM vaults
+    JOIN accounts ON accounts.id = vaults.creatorId
+    WHERE vaults.id = @Id;";
+
+    Vault updatedVault = _db.Query<Vault, Profile, Vault>(sql, JoinCreator, vaultToUpdate).FirstOrDefault();
+    return updatedVault;
   }
 
   private Vault JoinCreator(Vault vault, Profile profile)
