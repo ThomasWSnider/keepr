@@ -18,11 +18,12 @@ public class KeepsRepository : IRepository<Keep>
     keeps(name, description, img, creatorId)
     VALUES(@Name, @Description, @Img, @CreatorId);
     
-    SELECT *
+    SELECT keeps.*, accounts.*
     FROM keeps
-    WHERE id = LAST_INSERT_ID();";
+    JOIN accounts ON accounts.id = keeps.creatorId
+    WHERE keeps.id = LAST_INSERT_ID();";
 
-    Keep newKeep = _db.Query<Keep>(sql, keepData).FirstOrDefault();
+    Keep newKeep = _db.Query<Keep, Profile, Keep>(sql, JoinCreator, keepData).FirstOrDefault();
     return newKeep;
   }
 
@@ -44,6 +45,12 @@ public class KeepsRepository : IRepository<Keep>
   public Keep Update(Keep data)
   {
     throw new NotImplementedException();
+  }
+
+  private Keep JoinCreator(Keep keep, Profile profile)
+  {
+    keep.Creator = profile;
+    return keep;
   }
 }
 
