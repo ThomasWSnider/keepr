@@ -1,6 +1,6 @@
 namespace keepr.Models;
 
-public class RepoItem
+public abstract class RepoItem
 {
   public string Id { get; set; }
   public DateTime CreatedAt { get; set; }
