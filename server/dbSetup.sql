@@ -6,3 +6,4 @@ CREATE TABLE IF NOT EXISTS accounts(
   email varchar(255) UNIQUE COMMENT 'User Email',
   picture varchar(255) COMMENT 'User Picture'
 ) default charset utf8mb4 COMMENT '';
+
