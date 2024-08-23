@@ -27,9 +27,15 @@ public class KeepsRepository : IRepository<Keep>
     return newKeep;
   }
 
-  public void Delete(int id)
+  public void Delete(int keepId)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    DELETE FROM keeps
+    WHERE id = @keepId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { keepId });
+    if (rowsAffected < 1) throw new Exception($"Could not delete keep with id of {keepId}");
+    if (rowsAffected > 1) throw new Exception("Deleted more than one keep");
   }
 
   public List<Keep> GetAll()
