@@ -26,9 +26,15 @@ public class VaultsRepository : IRepository<Vault>
     return newVault;
   }
 
-  public void Delete(int id)
+  public void Delete(int vaultId)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    DELETE FROM vaults 
+    WHERE id = @vaultId LIMIT 1;";
+
+    int rowsAffected = _db.Execute(sql, new { vaultId });
+    if (rowsAffected > 1) throw new Exception($"Was unable to delete vault with id of {vaultId}");
+    if (rowsAffected < 1) throw new Exception($"Deleted more than one vault");
   }
 
   public List<Vault> GetAll()

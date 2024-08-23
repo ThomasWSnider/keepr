@@ -17,6 +17,14 @@ public class VaultsService
     return newVault;
   }
 
+  internal string DeleteVault(int vaultId, string userId)
+  {
+    Vault vaultToDelete = GetVaultById(vaultId, userId);
+    if (vaultToDelete.CreatorId != userId) throw new Exception("You can not delete a vault you did not create");
+    _repository.Delete(vaultId);
+    return $"Successfully deleted {vaultToDelete.Name}";
+  }
+
   internal Vault GetVaultById(int vaultId, string userId)
   {
     Vault vault = _repository.GetById(vaultId) ?? throw new Exception($"No Vault found with the id of {vaultId}");
