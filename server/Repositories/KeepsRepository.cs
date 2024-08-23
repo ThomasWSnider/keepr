@@ -55,9 +55,20 @@ public class KeepsRepository : IRepository<Keep>
     return keep;
   }
 
-  public Keep Update(Keep data)
+  public Keep Update(Keep keepToUpdate)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    UPDATE keeps
+    SET name = @Name, description = @Description, img = @Img, views = @views
+    WHERE id = @Id LIMIT 1;
+    
+    SELECT keeps.*, accounts.*
+    FROM keeps
+    JOIN accounts ON accounts.id = keeps.creatorId
+    WHERE keeps.id = @Id";
+
+    Keep updatedKeep = _db.Query<Keep, Profile, Keep>(sql, JoinCreator, keepToUpdate).FirstOrDefault();
+    return updatedKeep;
   }
 
   private Keep JoinCreator(Keep keep, Profile profile)
