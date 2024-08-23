@@ -1,5 +1,6 @@
 
 
+
 namespace keepr.Services;
 
 public class KeepsService
@@ -21,5 +22,11 @@ public class KeepsService
   {
     List<Keep> keeps = _repository.GetAll();
     return keeps;
+  }
+
+  internal Keep GetKeepById(int keepId)
+  {
+    Keep keep = _repository.GetById(keepId);
+    return keep;
   }
 }
