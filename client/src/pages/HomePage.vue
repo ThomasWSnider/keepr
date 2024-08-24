@@ -1,14 +1,32 @@
 <script setup>
+import { AppState } from "@/AppState";
+import { keepsService } from "@/services/KeepsService";
+import Pop from "@/utils/Pop";
+import { computed, onMounted } from "vue";
 
 
+const keeps = computed(() => AppState.keeps)
+
+onMounted(() => {
+  getAllKeeps()
+})
+
+async function getAllKeeps() {
+  try {
+    await keepsService.getAllKeeps()
+  }
+  catch (error) {
+    Pop.error(error);
+  }
+}
 
 </script>
 
 <template>
   <div class="container">
     <section class="row">
-      <div class="col-3">
-
+      <div v-for="keep in keeps" :key="keep.id" class="col-3">
+        {{ keep }}
       </div>
     </section>
   </div>

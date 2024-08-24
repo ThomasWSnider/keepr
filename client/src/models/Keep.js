@@ -1,4 +1,5 @@
 import { DbItem } from "./DbItem";
+import { Profile } from "./Profile";
 
 export class Keep extends DbItem{
   constructor(data){
@@ -9,6 +10,7 @@ export class Keep extends DbItem{
       this.views = data.views
       this.kept = data.kept
       this.creatorId = data.creatorId
+      this.creator = new Profile(data.creator)
   }
 }
 
