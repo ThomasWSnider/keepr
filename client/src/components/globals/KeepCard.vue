@@ -24,8 +24,8 @@ async function destroyKeep(keepId) {
 
 <template>
   <div class="position-relative keep-container mb-3">
-    <i v-if="account?.id == keep.creator.id" @click="destroyKeep(keep.id)" role="button"
-      class="mdi mdi-close-circle"></i>
+    <i v-if="account?.id == keep.creator.id" @click="destroyKeep(keep.id)" role="button" class="mdi mdi-close-circle"
+      :title="`Delete ${keep.name}`"></i>
 
     <div @click="activateKeep(keep.id)" class="selectable" data-bs-toggle="modal" data-bs-target="#keepDetailsModal">
       <img class=" img-fluid rounded shadow" :src="keep.img" :alt="keep.name" :title="`View ${keep.name}`">
