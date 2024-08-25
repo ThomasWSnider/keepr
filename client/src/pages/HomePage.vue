@@ -1,5 +1,6 @@
 <script setup>
 import { AppState } from "@/AppState";
+import KeepCard from "@/components/KeepCard.vue";
 import { keepsService } from "@/services/KeepsService";
 import Pop from "@/utils/Pop";
 import { computed, onMounted } from "vue";
@@ -23,10 +24,12 @@ async function getAllKeeps() {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container mt-5">
     <section class="row">
-      <div v-for="keep in keeps" :key="keep.id" class="col-3">
-        {{ keep }}
+      <div class="col-12">
+        <div class="masonry">
+          <KeepCard v-for="keep in keeps" :key="keep.id" :keep="keep" />
+        </div>
       </div>
     </section>
   </div>
@@ -50,6 +53,29 @@ async function getAllKeeps() {
       object-fit: contain;
       object-position: center;
     }
+  }
+}
+
+.masonry {
+  column-gap: 1em;
+  column-fill: balance;
+}
+
+@media (max-width: 767.98px) {
+  .masonry {
+    columns: 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .masonry {
+    columns: 3;
+  }
+}
+
+@media (min-width: 991.98px) {
+  .masonry {
+    columns: 4;
   }
 }
 </style>
