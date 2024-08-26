@@ -14,6 +14,8 @@ function activateKeep(keepId) {
 
 async function destroyKeep(keepId) {
   try {
+    const confirm = await Pop.confirm("Are you sure you want to delete this keep?", "It will be gone forever", "Confirm")
+    if (!confirm) return
     keepsService.destroyKeep(keepId)
   } catch (error) {
     Pop.error(error);

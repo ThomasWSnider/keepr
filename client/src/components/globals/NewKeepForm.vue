@@ -26,9 +26,7 @@ async function createNewKeep() {
     Pop.error(error);
   }
 }
-
 </script>
-
 
 <template>
   <div v-if="account" class="modal-body">
@@ -45,21 +43,21 @@ async function createNewKeep() {
           <div class="col-12 order-1">
             <div class="mb-3 form-floating">
               <input v-model="editableKeepData.img" type="url" class="form-control" id="img"
-                placeholder="Paste Image Here">
+                placeholder="Paste Image Here" maxlength="1000" required>
               <label for="img" class="form-label">Image</label>
             </div>
           </div>
           <div class="col-12 order-2">
             <div class="mb-3 form-floating">
               <input v-model="editableKeepData.name" type="text" class="form-control" id="name"
-                placeholder="Name Your Keep">
+                placeholder="Name Your Keep" maxlength="47" required>
               <label for="name" class="form-label">Title</label>
             </div>
           </div>
           <div class="col-lg-6 col-12 order-md-3 order-4">
             <div class="mb-5 form-floating">
               <textarea v-model="editableKeepData.description" class="form-control" id="description"
-                placeholder="Add Description"></textarea>
+                placeholder="Add Description" maxlength="1000" required></textarea>
               <label for="description" class="form-label">Description</label>
             </div>
           </div>
@@ -71,7 +69,8 @@ async function createNewKeep() {
                     alt="Image Preview" :title="`${editableKeepData.name}`">
                   <img v-else class="rounded shadow preview-img" src="/public/img/Placeholder.png"
                     alt="Add an Image URL">
-                  <div class=" keep-flavor d-flex align-items-start justify-content-between">
+                  <div v-if="editableKeepData.img"
+                    class=" keep-flavor d-flex align-items-start justify-content-between">
                     <p class="fs-2 fw-bold text-light text-meriweather-bold preview-text">{{ editableKeepData.name }}
                     </p>
                   </div>
@@ -92,7 +91,6 @@ async function createNewKeep() {
   </div>
 </template>
 
-
 <style lang="scss" scoped>
 textarea {
   min-height: 18em !important;
@@ -108,8 +106,6 @@ textarea {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #040404;
   overflow-wrap: break-word;
-  max-height: 100%;
-  max-width: 66%;
   margin: 0;
   overflow: hidden;
 }
