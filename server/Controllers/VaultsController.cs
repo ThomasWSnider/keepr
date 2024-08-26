@@ -64,13 +64,21 @@ public class VaultsController : ControllerBase
   }
 
   [HttpGet("{vaultId}/keeps")]
-  public async Task<ActionResult<List<VaultKeepsController>>> GetKeepsByVaultId(int vaultId)
+  public async Task<ActionResult<List<Kept>>> GetKeepsByVaultId(int vaultId)
   {
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      List<VaultKeep> vaultKeeps = _vaultKeepsService.GetKeepsByVaultId(vaultId, userInfo.Id);
-      return Ok(vaultKeeps);
+      if (userInfo == null)
+      {
+        List<Kept> keptKeeps = _vaultKeepsService.GetKeepsByVaultId(vaultId);
+        return Ok(keptKeeps);
+      }
+      else
+      {
+        List<Kept> keptKeeps = _vaultKeepsService.GetKeepsByVaultId(vaultId, userInfo.Id);
+        return Ok(keptKeeps);
+      }
     }
     catch (Exception exception)
     {

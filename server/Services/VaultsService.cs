@@ -32,6 +32,13 @@ public class VaultsService
     return vault;
   }
 
+  internal Vault GetVaultById(int vaultId)
+  {
+    Vault vault = _repository.GetById(vaultId) ?? throw new Exception($"No Vault found with the id of {vaultId}");
+    if (vault.IsPrivate == true) throw new Exception($"No Vault found with the id of {vaultId}");
+    return vault;
+  }
+
   internal Vault UpdateVault(int vaultId, Vault vaultData, string userId)
   {
     Vault vaultToUpdate = GetVaultById(vaultId, userId);

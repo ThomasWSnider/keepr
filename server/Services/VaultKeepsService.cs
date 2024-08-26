@@ -15,14 +15,37 @@ public class VaultKeepsService
 
   internal VaultKeep CreateVaultKeep(VaultKeep vaultKeepData)
   {
+    Vault vaultToConfirm = _vaultsService.GetVaultById(vaultKeepData.VaultId, vaultKeepData.CreatorId);
+    if (vaultToConfirm.CreatorId != vaultKeepData.CreatorId) throw new Exception("You cannot add a keept to a vault you did not create");
     VaultKeep vaultKeep = _repository.Create(vaultKeepData);
     return vaultKeep;
   }
 
-  internal List<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
+  internal string DeleteVaultKeep(int vaultKeepId, string userId)
   {
-    Vault vaultToValidate = _vaultsService.GetVaultById(vaultId, userId);
-    List<VaultKeep> vaultKeeps = _repository.GetKeepsByVaultId(vaultId);
-    return vaultKeeps;
+    VaultKeep vaultKeep = GetVaultKeepById(vaultKeepId);
+    if (vaultKeep.CreatorId != userId) throw new Exception("You cannot delete a keep-vault relationship you did not create");
+    _repository.Delete(vaultKeepId);
+    return "Vault-keep relationship successfully deleted";
+  }
+
+  internal List<Kept> GetKeepsByVaultId(int vaultId, string userId)
+  {
+    _vaultsService.GetVaultById(vaultId, userId);
+    List<Kept> keptKeeps = _repository.GetKeepsByVaultId(vaultId);
+    return keptKeeps;
+  }
+
+  internal List<Kept> GetKeepsByVaultId(int vaultId)
+  {
+    _vaultsService.GetVaultById(vaultId);
+    List<Kept> keptKeeps = _repository.GetKeepsByVaultId(vaultId);
+    return keptKeeps;
+  }
+
+  private VaultKeep GetVaultKeepById(int vaultKeepId)
+  {
+    VaultKeep vaultKeep = _repository.GetById(vaultKeepId) ?? throw new Exception($"Now Vault Keep found with id of {vaultKeepId}");
+    return vaultKeep;
   }
 }
