@@ -69,7 +69,8 @@ async function createNewKeep() {
                 <div class="position-relative">
                   <img v-if="editableKeepData.img" class="img-fluid rounded shadow keep-img" :src="editableKeepData.img"
                     alt="Image Preview" :title="`${editableKeepData.name}`">
-                  <img v-else class="rounded shadow keep-img" src="/public/img/Placeholder.png" alt="Add an Image URL">
+                  <img v-else class="rounded shadow preview-img" src="/public/img/Placeholder.png"
+                    alt="Add an Image URL">
                   <div class=" keep-flavor d-flex align-items-center justify-content-between">
                     <p class="fs-2 fw-bold text-light text-meriweather-bold preview-text">{{ editableKeepData.name }}
                     </p>
@@ -126,7 +127,17 @@ textarea {
   @media (max-width: 991.98px) {
     max-height: 10em;
   }
+}
 
+.preview-img {
+  height: 12em;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+
+  @media (max-width: 991.98px) {
+    max-height: 10em;
+  }
 }
 
 .creator-img {

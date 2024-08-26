@@ -11,7 +11,7 @@ const keep = computed(() => AppState.activeKeep)
   <div v-if="keep" class="modal-body container-fluid p-0">
     <section class="row">
       <div class="col-md-6 col-12 p-0">
-        <img class="img-fluid rounded-start" :src="keep.img" :alt="keep.name">
+        <img class="img-fluid rounded-start keep-img" :src="keep.img" :alt="keep.name">
       </div>
       <div class="col-md-6 col-12 d-flex flex-column justify-content-between">
         <div class="d-flex justify-content-center mt-4">
@@ -45,5 +45,10 @@ const keep = computed(() => AppState.activeKeep)
   height: 5dvh;
   aspect-ratio: 1/1;
   border-radius: 50%;
+}
+
+.keep-img {
+  height: 80dvh;
+  object-fit: cover;
 }
 </style>
