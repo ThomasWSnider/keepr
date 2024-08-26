@@ -24,8 +24,7 @@
     "body": [
       "try {",
       "  $0",
-      "}",
-      "catch (error){",
+      "} catch (error){",
       "  Pop.error(error);",
       "}"
     ],

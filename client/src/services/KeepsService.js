@@ -11,6 +11,12 @@ class KeepsService{
     AppState.activeKeep = activeKeep
     logger.log(AppState.activeKeep);
   }
+
+  async createNewKeep(keepData) {
+    const response = await api.post("api/keeps", keepData)
+    const newKeep = new Keep(response.data)
+    AppState.keeps.push(newKeep)
+  }
   
   async destroyKeep(keepId) {
     await api.delete(`api/keeps/${keepId}`)

@@ -1,9 +1,11 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
+import { AppState } from "@/AppState.js";
 
 const theme = ref(loadState('theme') || 'light')
+const account = computed(() => AppState.account)
 
 onMounted(() => {
   document.documentElement.setAttribute('data-bs-theme', theme.value)
@@ -31,7 +33,22 @@ function toggleTheme() {
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-
+          <div v-if="account" class="dropdown">
+            <button class="btn btn-secondary-outline dropdown-toggle" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Create
+            </button>
+            <ul class="dropdown-menu py-1">
+              <li>
+                <p class="dropdown-item m-0 " data-bs-toggle="modal" data-bs-target="#newKeepFormModal">New
+                  Keep</p>
+              </li>
+              <hr class="m-1">
+              <li>
+                <p class="dropdown-item m-0">New Vault</p>
+              </li>
+            </ul>
+          </div>
         </li>
       </ul>
       <!-- LOGIN COMPONENT HERE -->
@@ -64,6 +81,12 @@ a:hover {
 @media screen and (min-width: 576px) {
   nav {
     height: 64px;
+  }
+}
+
+li {
+  p {
+    user-select: none;
   }
 }
 </style>
