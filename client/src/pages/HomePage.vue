@@ -1,8 +1,6 @@
 <script setup>
 import { AppState } from "@/AppState";
 import KeepCard from "@/components/globals/KeepCard.vue";
-import KeepDetails from "@/components/globals/KeepDetails.vue";
-import ModalWrapper from "@/components/ModalWrapper.vue";
 import { keepsService } from "@/services/KeepsService";
 import Pop from "@/utils/Pop";
 import { computed, onMounted } from "vue";

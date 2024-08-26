@@ -71,7 +71,7 @@ async function createNewKeep() {
                     alt="Image Preview" :title="`${editableKeepData.name}`">
                   <img v-else class="rounded shadow preview-img" src="/public/img/Placeholder.png"
                     alt="Add an Image URL">
-                  <div class=" keep-flavor d-flex align-items-center justify-content-between">
+                  <div class=" keep-flavor d-flex align-items-start justify-content-between">
                     <p class="fs-2 fw-bold text-light text-meriweather-bold preview-text">{{ editableKeepData.name }}
                     </p>
                   </div>
@@ -107,7 +107,11 @@ textarea {
 .preview-text {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #040404;
+  overflow-wrap: break-word;
+  max-height: 100%;
+  max-width: 66%;
   margin: 0;
+  overflow: hidden;
 }
 
 .img-preview {
@@ -154,8 +158,10 @@ textarea {
 
 .keep-flavor {
   position: absolute;
-  width: 66%;
+  width: 70%;
+  max-height: 85%;
   bottom: 5px;
   left: 10px;
+  overflow: hidden;
 }
 </style>
