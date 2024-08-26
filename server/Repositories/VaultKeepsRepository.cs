@@ -11,9 +11,18 @@ public class VaultKeepsRepository : IRepository<VaultKeep>
     _db = db;
   }
 
-  public VaultKeep Create(VaultKeep data)
+  public VaultKeep Create(VaultKeep vaultKeepData)
   {
-    throw new NotImplementedException();
+    string sql = @"
+    INSERT INTO vaultKeeps(keepId, vaultId, creatorId)
+    VALUES(@KeepId, @VaultId, @CreatorId);
+    
+    SELECT *
+    FROM vaultKeeps
+    WHERE vaultKeeps.id = LAST_INSERT_ID()";
+
+    VaultKeep vaultKeep = _db.Query<VaultKeep>(sql, vaultKeepData).FirstOrDefault();
+    return vaultKeep;
   }
 
   public void Delete(int id)
