@@ -21,6 +21,7 @@ public class KeepsRepository : IRepository<Keep>
     SELECT keeps.*, accounts.*
     FROM keeps
     JOIN accounts ON accounts.id = keeps.creatorId
+    
     WHERE keeps.id = LAST_INSERT_ID();";
 
     Keep newKeep = _db.Query<Keep, Profile, Keep>(sql, JoinCreator, keepData).FirstOrDefault();
@@ -43,7 +44,8 @@ public class KeepsRepository : IRepository<Keep>
     string sql = @"
     SELECT keeps.*, accounts.*
     FROM keeps
-    JOIN accounts ON accounts.id = keeps.creatorId;";
+    JOIN accounts ON accounts.id = keeps.creatorId
+    ORDER BY keeps.createdAt DESC;";
 
     List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, JoinCreator).ToList();
     return keeps;
