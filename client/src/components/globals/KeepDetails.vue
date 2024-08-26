@@ -23,12 +23,12 @@ const keep = computed(() => AppState.activeKeep)
           <p class="fs-2 fw-bold text-center">{{ keep.name }}</p>
           <p class="px-4">{{ keep.description }}</p>
         </div>
-        <div class="px-4 d-flex justify-content-between align-items-center mb-3">
+        <div class="d-flex justify-content-between align-items-center mb-3">
           <form v-if="account">
             Select Keep
             <button class="btn btn-secondary px-1 py-0">Save</button>
           </form>
-          <div class="d-flex align-items-center">
+          <div class=" pe-2 d-flex align-items-center justify-content-center">
             <img class="creator-img selectable me-1" :src="keep.creator.picture" :alt="keep.creator.name"
               :title="`Go to ${keep.creator.name}'s profile page`">
             <p class="mb-0 fw-semibold">{{ keep.creator.name }}</p>
