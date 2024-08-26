@@ -35,9 +35,21 @@ public class VaultKeepsRepository : IRepository<VaultKeep>
     throw new NotImplementedException();
   }
 
+  internal List<VaultKeep> GetKeepsByVaultId(int vaultId)
+  {
+    string sql = @"
+    SELECT *
+    FROM vaultKeeps
+    WHERE vaultKeeps.vaultId = @vaultId;";
+
+    List<VaultKeep> vaultKeeps = _db.Query<VaultKeep>(sql, new { vaultId }).ToList();
+    return vaultKeeps;
+  }
+
   public VaultKeep Update(VaultKeep data)
   {
     throw new NotImplementedException();
   }
+
 }
 
