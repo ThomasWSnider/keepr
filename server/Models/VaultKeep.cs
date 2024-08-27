@@ -10,5 +10,4 @@ public class VaultKeep : RepoItem<int>
 public class Kept : Keep
 {
   public int VaultKeepId { get; set; }
-
 }
