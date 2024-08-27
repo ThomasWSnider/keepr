@@ -36,13 +36,6 @@ public class VaultKeepsService
     return keptKeeps;
   }
 
-  internal List<Kept> GetKeepsByVaultId(int vaultId)
-  {
-    _vaultsService.GetVaultById(vaultId);
-    List<Kept> keptKeeps = _repository.GetKeepsByVaultId(vaultId);
-    return keptKeeps;
-  }
-
   private VaultKeep GetVaultKeepById(int vaultKeepId)
   {
     VaultKeep vaultKeep = _repository.GetById(vaultKeepId) ?? throw new Exception($"Now Vault Keep found with id of {vaultKeepId}");

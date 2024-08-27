@@ -9,11 +9,12 @@ public class ProfilesController : ControllerBase
   private readonly KeepsService _keepsService;
   private readonly VaultsService _vaultsService;
 
-  public ProfilesController(Auth0Provider auth0Provider, ProfilesService profilesService, KeepsService keepsService)
+  public ProfilesController(Auth0Provider auth0Provider, ProfilesService profilesService, KeepsService keepsService, VaultsService vaultsService)
   {
     _auth0Provider = auth0Provider;
     _profilesService = profilesService;
     _keepsService = keepsService;
+    _vaultsService = vaultsService;
   }
 
   [HttpGet("{profileId}")]
