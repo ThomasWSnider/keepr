@@ -70,6 +70,18 @@ public class VaultsRepository : IRepository<Vault>
     return updatedVault;
   }
 
+  internal List<Vault> GetProfileVaults(string profileId)
+  {
+    string sql = @"
+      SELECT vaults.*, accounts.*
+      FROM vaults
+      JOIN accounts ON accounts.id = vaults.creatorId
+      WHERE vaults.creatorId = @profileId;";
+
+    List<Vault> vaults = _db.Query<Vault, Profile, Vault>(sql, JoinCreator, new { profileId }).ToList();
+    return vaults;
+  }
+
   private Vault JoinCreator(Vault vault, Profile profile)
   {
     vault.Creator = profile;

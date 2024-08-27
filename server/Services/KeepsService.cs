@@ -35,6 +35,12 @@ public class KeepsService
     return keep ?? throw new Exception($"Could not find keep with the id of {keep.Id}");
   }
 
+  internal List<Keep> GetProfileKeeps(string profileId)
+  {
+    List<Keep> keeps = _repository.GetProfileKeeps(profileId);
+    return keeps;
+  }
+
   internal Keep UpdateKeep(int keepId, Keep keepData, string userId)
   {
     Keep keepToUpdate = _repository.GetById(keepId);

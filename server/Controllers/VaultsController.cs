@@ -69,16 +69,9 @@ public class VaultsController : ControllerBase
     try
     {
       Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-      if (userInfo == null)
-      {
-        List<Kept> keptKeeps = _vaultKeepsService.GetKeepsByVaultId(vaultId);
-        return Ok(keptKeeps);
-      }
-      else
-      {
-        List<Kept> keptKeeps = _vaultKeepsService.GetKeepsByVaultId(vaultId, userInfo.Id);
-        return Ok(keptKeeps);
-      }
+
+      List<Kept> keptKeeps = _vaultKeepsService.GetKeepsByVaultId(vaultId, userInfo?.Id);
+      return Ok(keptKeeps);
     }
     catch (Exception exception)
     {

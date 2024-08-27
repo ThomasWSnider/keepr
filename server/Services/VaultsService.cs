@@ -25,17 +25,18 @@ public class VaultsService
     return $"Successfully deleted {vaultToDelete.Name}";
   }
 
+  internal List<Vault> GetProfileVaults(string profileId, string userId)
+  {
+    List<Vault> vaults = _repository.GetProfileVaults(profileId);
+    if (profileId == userId) return vaults;
+    List<Vault> filteredVaults = vaults.Where(vault => vault.IsPrivate == false).ToList();
+    return filteredVaults;
+  }
+
   internal Vault GetVaultById(int vaultId, string userId)
   {
     Vault vault = _repository.GetById(vaultId) ?? throw new Exception($"No Vault found with the id of {vaultId}");
     if (vault.IsPrivate == true && vault.CreatorId != userId) throw new Exception($"No Vault found with the id of {vaultId}");
-    return vault;
-  }
-
-  internal Vault GetVaultById(int vaultId)
-  {
-    Vault vault = _repository.GetById(vaultId) ?? throw new Exception($"No Vault found with the id of {vaultId}");
-    if (vault.IsPrivate == true) throw new Exception($"No Vault found with the id of {vaultId}");
     return vault;
   }
 

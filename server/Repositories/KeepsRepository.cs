@@ -63,6 +63,22 @@ public class KeepsRepository : IRepository<Keep>
     return keep;
   }
 
+  internal List<Keep> GetProfileKeeps(string profileId)
+  {
+    string sql = @"
+      SELECT keeps.*, accounts.*
+      FROM keeps
+      JOIN accounts ON accounts.id = keeps.creatorId
+      WHERE keeps.creatorId = @profileId;";
+
+    List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
+    {
+      keep.Creator = profile;
+      return keep;
+    }, new { profileId }).ToList();
+    return keeps;
+  }
+
   public Keep Update(Keep keepToUpdate)
   {
     string sql = @"

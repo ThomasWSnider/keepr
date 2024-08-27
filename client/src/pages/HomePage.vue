@@ -59,6 +59,10 @@ async function getAllKeeps() {
 .masonry {
   column-gap: 1em;
   column-fill: balance;
+
+  &>* {
+    display: inline-block;
+  }
 }
 
 @media (max-width: 767.98px) {
