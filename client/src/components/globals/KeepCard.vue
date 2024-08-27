@@ -6,7 +6,7 @@ import Pop from "@/utils/Pop";
 import { computed } from "vue";
 
 const account = computed(() => AppState.account)
-defineProps({ keep: Keep })
+defineProps({ keep: Keep, onProfile: Boolean })
 
 function activateKeep(keepId) {
   keepsService.activateKeep(keepId)
@@ -37,7 +37,7 @@ async function destroyKeep(keepId) {
       </div>
     </div>
     <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
-      <div class="selectable creator-flavor">
+      <div v-if="!onProfile" class="selectable creator-flavor">
         <img class="img-fluid creator-img" :src="keep.creator.picture" :alt="keep.creator.name"
           :title="`Go To ${keep.creator.name}'s profile page`">
       </div>

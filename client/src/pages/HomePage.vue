@@ -28,7 +28,7 @@ async function getAllKeeps() {
     <section class="row">
       <div class="col-12">
         <div class="masonry">
-          <KeepCard v-for="keep in keeps" :key="keep.id" :keep="keep" />
+          <KeepCard v-for="keep in keeps" :key="keep.id" :keep="keep" :onProfile="false" />
         </div>
       </div>
     </section>

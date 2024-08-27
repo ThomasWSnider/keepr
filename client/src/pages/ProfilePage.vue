@@ -1,5 +1,7 @@
 <script setup>
 import { AppState } from "@/AppState";
+import KeepCard from "@/components/globals/KeepCard.vue";
+import VaultCard from "@/components/globals/VaultCard.vue";
 import { profilesService } from "@/services/ProfilesService";
 import Pop from "@/utils/Pop";
 import { computed, onMounted } from "vue";
@@ -43,7 +45,7 @@ async function getProfileVaults() {
 
 
 <template>
-  <div v-if="profile && profileKeeps && profileVaults" class="container">
+  <div v-if="profile" class="container">
     <section class="row justify-content-center mt-5 mb-3">
       <div class="col-10 mb-5">
         <div class="cover-img shadow rounded position-relative">
@@ -57,16 +59,27 @@ async function getProfileVaults() {
         </div>
       </div>
       <div class="col-12 my-5"></div>
-      <div class="col-12 mt-5">
+      <div class="col-12 mt-5 mb-3">
         <div class="row">
           <div class="col-12">
             <p class="fs-2 fw-semibold">Vaults</p>
           </div>
-          <div v-for="keep in profileKeeps" :key="keep.id" class="col-3">
-            keep
+          <div v-for="vault in profileVaults" :key="vault.id" class="col-md-3 col-sm-4 col-6">
+            <VaultCard :vault="vault" />
           </div>
         </div>
       </div>
+      <div class="col-12">
+        <div class="row jutstify-content-center">
+          <div class="col-12">
+            <p class="fs-2 fw-semibold">Keeps</p>
+          </div>
+          <div class="masonry">
+            <KeepCard v-for="keep in profileKeeps" :key="keep.id" :keep="keep" :onProfile="true" />
+          </div>
+        </div>
+      </div>
+
     </section>
   </div>
 </template>
@@ -91,5 +104,32 @@ async function getProfileVaults() {
   bottom: -45%;
   left: 50%;
   transform: translate(-50%);
+}
+
+.masonry {
+  column-gap: 1em;
+  column-fill: balance;
+
+  &>* {
+    display: inline-block;
+  }
+}
+
+@media screen and (max-width: 767.98px) {
+  .masonry {
+    columns: 2;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .masonry {
+    columns: 3;
+  }
+}
+
+@media screen and (min-width: 991.98px) {
+  .masonry {
+    columns: 4;
+  }
 }
 </style>
