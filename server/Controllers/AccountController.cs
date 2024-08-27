@@ -34,7 +34,7 @@ public class AccountController : ControllerBase
   public async Task<ActionResult<List<Vault>>> GetAccountVaults()
   {
     Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-    List<Vault> vaults = _vaultsService.GetProfileVaults(userInfo.Id, userInfo.Id);
+    List<Vault> vaults = _vaultsService.GetProfileVaults(userInfo?.Id, userInfo?.Id);
     return Ok(vaults);
   }
 }

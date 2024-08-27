@@ -36,11 +36,12 @@ async function destroyKeep(keepId) {
         <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ keep.name }}</p>
       </div>
     </div>
-
-    <div class="selectable creator-flavor">
-      <img class="img-fluid creator-img" :src="keep.creator.picture" :alt="keep.creator.name"
-        :title="`Go To ${keep.creator.name}'s profile page`">
-    </div>
+    <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
+      <div class="selectable creator-flavor">
+        <img class="img-fluid creator-img" :src="keep.creator.picture" :alt="keep.creator.name"
+          :title="`Go To ${keep.creator.name}'s profile page`">
+      </div>
+    </RouterLink>
 
   </div>
 </template>
