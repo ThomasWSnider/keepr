@@ -58,6 +58,7 @@ public class VaultKeepsRepository : IRepository<VaultKeep>
     List<Kept> vaultKeeps = _db.Query<VaultKeep, Kept, Profile, Kept>(sql, (vaultKeep, kept, profile) =>
     {
       kept.VaultKeepId = vaultKeep.Id;
+      kept.VaultKeepCreatorId = vaultKeep.CreatorId;
       kept.Creator = profile;
       return kept;
     }, new { vaultId }).ToList();

@@ -15,10 +15,11 @@ export class VaultKeep extends DbItem{
 
 export class Kept extends Keep{
   /**
-   * @param {{ vaultKeepId: Number; }} data
+   * @param {{ vaultKeepId: Number; vaultKeepCreatorId: String; }} data
    */
   constructor(data){
     super(data)
     this.vaultKeepId = data.vaultKeepId
+    this.vaultKeepCreatorId = data.vaultKeepCreatorId
   }
 }

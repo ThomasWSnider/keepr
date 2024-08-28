@@ -1,12 +1,17 @@
 <script setup>
 import { AppState } from "@/AppState";
 import { Keep } from "@/models/Keep";
+import { Kept } from "@/models/VaultKeep";
 import { keepsService } from "@/services/KeepsService";
+import { vaultKeepsService } from "@/services/vaultKeepsService";
 import Pop from "@/utils/Pop";
 import { computed } from "vue";
+import { useRoute } from "vue-router";
 
 const account = computed(() => AppState.account)
-defineProps({ keep: Keep, onProfile: Boolean })
+const route = useRoute()
+defineProps({ keep: [Kept, Keep], onProfile: Boolean })
+
 
 function activateKeep(keepId) {
   keepsService.activateKeep(keepId)
@@ -21,17 +26,30 @@ async function destroyKeep(keepId) {
     Pop.error(error);
   }
 }
+
+async function destroyVaultKeep(vaultKeepId) {
+  try {
+    const confirm = await Pop.confirm("Are you sure you want to delete this keep from your Vault?", "", "Confirm")
+    if (!confirm) return
+    await vaultKeepsService.destroyVaultKeep(vaultKeepId)
+  } catch (error) {
+    Pop.error(error);
+  }
+}
 </script>
 
 
 <template>
   <div class="position-relative keep-container mb-3">
-    <i v-if="account?.id == keep.creator.id" @click="destroyKeep(keep.id)" role="button" class="mdi mdi-close-circle"
+    <i v-if="account?.id == keep.creator.id && !keep.vaultKeepId" @click="destroyKeep(keep.id)" role="button"
+      class="mdi mdi-close-circle" :title="`Delete ${keep.name}`"></i>
+
+    <i v-else-if="account?.id == keep.vaultKeepCreatorId && keep.vaultKeepId"
+      @click="destroyVaultKeep(keep.vaultKeepId)" role="button" class="mdi mdi-close-circle"
       :title="`Delete ${keep.name}`"></i>
 
     <div @click="activateKeep(keep.id)" class="selectable" data-bs-toggle="modal" data-bs-target="#keepDetailsModal">
       <img class=" img-fluid rounded shadow" :src="keep.img" :alt="keep.name" :title="`View ${keep.name}`">
-
       <div class=" keep-flavor d-flex align-items-center justify-content-between">
         <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ keep.name }}</p>
       </div>

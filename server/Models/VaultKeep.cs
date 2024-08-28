@@ -10,4 +10,5 @@ public class VaultKeep : RepoItem<int>
 public class Kept : Keep
 {
   public int VaultKeepId { get; set; }
+  public string VaultKeepCreatorId { get; set; }
 }

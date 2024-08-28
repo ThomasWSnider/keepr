@@ -4,11 +4,13 @@ import KeepCard from "@/components/globals/KeepCard.vue";
 import { vaultsService } from "@/services/VaultsService";
 import Pop from "@/utils/Pop";
 import { computed, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const vault = computed(() => AppState.activeVault)
 const vaultKeeps = computed(() => AppState.ActiveVaultKeeps)
+const account = computed(() => AppState.account)
 const route = useRoute()
+const router = useRouter()
 
 onMounted(() => {
   getVaultById(route.params.vaultId)
@@ -20,12 +22,25 @@ async function getVaultById(vaultId) {
     await vaultsService.getVaultById(vaultId)
   } catch (error) {
     Pop.error(error);
+    if (error.response.data.includes("No Vault found")) router.push({ name: "Home" })
   }
 }
 
 async function getVaultKeepsByVaultId(vaultId) {
   try {
     await vaultsService.getVaultKeepsByVaultId(vaultId)
+  } catch (error) {
+    Pop.error(error);
+  }
+}
+
+async function destroyVault(vaultId) {
+  try {
+    const confirm = await Pop.confirm("Are you sure you want to delete this Vault?", "This will be permanent", "Yes, delete this Vault")
+    if (!confirm) return
+    await vaultsService.destroyVault(vaultId)
+    Pop.success(`${vault.value.name} was successfully deleted`)
+    router.push({ name: "Profile", params: { profileId: account.value.id } })
   } catch (error) {
     Pop.error(error);
   }
@@ -46,7 +61,23 @@ async function getVaultKeepsByVaultId(vaultId) {
       </div>
       <div class="row justify-content-center">
         <div class="col-5 text-end px-0">
-          <i role="button" class="mdi selectable rounded-pill px-1 mdi-dots-horizontal fs-2"></i>
+          <div v-if="account?.id == vault.creatorId" class="dropdown mt-4">
+            <button class="btn delete-vault-btn rounded-pill" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i role="button" class="mdi px-1 mdi-dots-horizontal fs-2"></i>
+            </button>
+            <ul class="dropdown-menu py-1">
+              <li>
+                <p class="dropdown-item m-0 " data-bs-toggle="modal" data-bs-target="#newKeepFormModal">
+                  Edit Vault
+                </p>
+              </li>
+              <hr class="m-1">
+              <li>
+                <p @click="destroyVault(vault.id)" class="dropdown-item m-0 text-danger">Delete Vault</p>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="row justify-content-center mb-4">
@@ -78,6 +109,19 @@ async function getVaultKeepsByVaultId(vaultId) {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #040404;
   margin: 0;
+}
+
+.delete-vault-btn {
+  background-color: var(--bs-page);
+  border: none;
+
+  &:hover {
+    background-color: #a8a8a856;
+  }
+}
+
+li>p {
+  user-select: none;
 }
 
 p {

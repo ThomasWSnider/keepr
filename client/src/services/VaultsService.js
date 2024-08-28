@@ -5,6 +5,11 @@ import { Kept } from "@/models/VaultKeep"
 
 
 class VaultsService{
+  async destroyVault(vaultId) {
+    await api.delete(`api/vaults/${vaultId}`)
+    const vaultIndex = AppState.accountVaults.findIndex((vault) => vault.id == vaultId)
+    AppState.accountVaults.splice(vaultIndex, 1)
+  }
   async getAccountVaults(){
     const response = await api.get("account/vaults")
     const accountVaults = response.data.map((vaultPOJO) => new Vault(vaultPOJO))
