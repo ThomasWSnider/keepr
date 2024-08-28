@@ -12,7 +12,7 @@ export const AppState = reactive({
   keeps: [],
   /** @type {import('./models/Keep.js').Keep[]} keeps created by focused Profile*/
   profileKeeps: [],
-  /** @type {import('./models/Keep.js').Keep} active keep for keep details modal*/
+  /** @type {import('./models/Keep.js').Keep | import('./models/VaultKeep.js').Kept} active keep for keep details modal*/
   activeKeep: null,
   /** @type {import('./models/Vault.js').Vault[]} all vaults tied to account*/
   accountVaults: [],
