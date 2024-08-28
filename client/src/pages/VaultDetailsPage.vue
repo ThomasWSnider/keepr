@@ -7,7 +7,7 @@ import { computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const vault = computed(() => AppState.activeVault)
-const vaultKeeps = computed(() => AppState.ActiveVaultKeeps)
+const vaultKeeps = computed(() => AppState.activeVaultKeeps)
 const account = computed(() => AppState.account)
 const route = useRoute()
 const router = useRouter()
@@ -131,7 +131,7 @@ p {
 
 .masonry {
   column-gap: 1em;
-  column-fill: balance;
+  column-fill: balance-all;
 
   &>* {
     display: inline-block;

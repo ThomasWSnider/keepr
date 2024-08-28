@@ -48,7 +48,7 @@ async function saveKeep(keepId) {
             <div class="d-flex">
               <select v-model="editableVaultKeepData.vaultId" class="form-select rounded-end-0"
                 aria-label="Select Vault">
-                <option selected disabled>--Select Vault--</option>
+                <option selected disabled value="">--Select Vault--</option>
                 <option v-for="vault in vaults" :key="vault.id" :value="vault.id">{{ vault.name }}</option>
               </select>
               <button type="submit" class="btn btn-secondary rounded-start-0 ps-1 pe-2 py-0">Save</button>

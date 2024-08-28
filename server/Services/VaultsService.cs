@@ -13,6 +13,7 @@ public class VaultsService
 
   internal Vault CreateVault(Vault vaultData)
   {
+    vaultData.Description ??= "Add a description for your Vault";
     Vault newVault = _repository.Create(vaultData);
     return newVault;
   }

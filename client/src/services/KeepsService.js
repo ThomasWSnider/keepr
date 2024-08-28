@@ -1,7 +1,6 @@
 import { api } from "./AxiosService"
 import { Keep } from "@/models/Keep";
 import { AppState } from "@/AppState";
-import { logger } from "@/utils/Logger";
 
 class KeepsService{
   
@@ -10,7 +9,7 @@ class KeepsService{
     let activeKept = null
     const activeKeep = AppState.keeps.find((keep) => keep.id == keepId)
     if (!activeKeep){
-      activeKept = AppState.ActiveVaultKeeps.find((kept) => kept.id = keepId)
+      activeKept = AppState.activeVaultKeeps.find((kept) => kept.id = keepId)
     }
     AppState.activeKeep = activeKeep ?? activeKept
   }

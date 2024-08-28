@@ -58,7 +58,7 @@ async function getAllKeeps() {
 
 .masonry {
   column-gap: 1em;
-  column-fill: balance;
+  column-fill: balance-all;
 
   &>* {
     display: inline-block;

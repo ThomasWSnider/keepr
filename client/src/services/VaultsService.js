@@ -5,6 +5,12 @@ import { Kept } from "@/models/VaultKeep"
 
 
 class VaultsService{
+  async CreateNewVault(vaultData) {
+    const response = await api.post(`api/vaults`, vaultData)
+    const newVault = new Vault(response.data)
+    AppState.accountVaults.push(newVault)
+    return newVault
+  }
   async destroyVault(vaultId) {
     await api.delete(`api/vaults/${vaultId}`)
     const vaultIndex = AppState.accountVaults.findIndex((vault) => vault.id == vaultId)
@@ -24,7 +30,7 @@ class VaultsService{
   async getVaultKeepsByVaultId(vaultId) {
     const response = await api.get(`api/vaults/${vaultId}/keeps`)
     const activeVaultKeeps = response.data.map((kept) => new Kept(kept))
-    AppState.ActiveVaultKeeps = activeVaultKeeps
+    AppState.activeVaultKeeps = activeVaultKeeps
   }
 }
 

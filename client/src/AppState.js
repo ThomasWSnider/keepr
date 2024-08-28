@@ -21,6 +21,6 @@ export const AppState = reactive({
   /** @type {import('./models/Vault.js').Vault} all public vaults tied to a profile*/
   activeVault: null,
   /** @type {import('./models/VaultKeep.js').Kept[]} all public vaults tied to focused profile*/
-  ActiveVaultKeeps: []
+  activeVaultKeeps: []
 })
 
