@@ -3,7 +3,7 @@ import { AppState } from "@/AppState";
 import { Keep } from "@/models/Keep";
 import { Kept } from "@/models/VaultKeep";
 import { keepsService } from "@/services/KeepsService";
-import { vaultKeepsService } from "@/services/vaultKeepsService";
+import { vaultKeepsService } from "@/services/VaultKeepsService";
 import Pop from "@/utils/Pop";
 import { computed } from "vue";
 import { useRoute } from "vue-router";
