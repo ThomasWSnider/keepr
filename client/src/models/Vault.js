@@ -15,4 +15,8 @@ export class Vault extends DbItem{
     this.creatorId = data.creatorId
     this.creator = new Profile(data.creator)
   }
+
+  get imgUrl(){
+    return `url(${this.img})`
+  }
 }

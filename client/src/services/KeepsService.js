@@ -7,9 +7,12 @@ class KeepsService{
   
   activateKeep(keepId){
     AppState.activeKeep = null
+    let activeKept = null
     const activeKeep = AppState.keeps.find((keep) => keep.id == keepId)
-    AppState.activeKeep = activeKeep
-    logger.log(AppState.activeKeep);
+    if (!activeKeep){
+      activeKept = AppState.ActiveVaultKeeps.find((kept) => kept.id = keepId)
+    }
+    AppState.activeKeep = activeKeep ?? activeKept
   }
 
   async createNewKeep(keepData) {
