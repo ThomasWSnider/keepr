@@ -1,6 +1,8 @@
 <script setup>
 import { AppState } from "@/AppState";
 import KeepCard from "@/components/globals/KeepCard.vue";
+import KeepDetails from "@/components/globals/KeepDetails.vue";
+import ModalWrapper from "@/components/ModalWrapper.vue";
 import { keepsService } from "@/services/KeepsService";
 import Pop from "@/utils/Pop";
 import { computed, onMounted } from "vue";
@@ -33,6 +35,9 @@ async function getAllKeeps() {
       </div>
     </section>
   </div>
+  <ModalWrapper modal-id="keepDetailsModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
+    <KeepDetails />
+  </ModalWrapper>
 </template>
 
 <style scoped lang="scss">

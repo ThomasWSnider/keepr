@@ -4,14 +4,9 @@ import { AppState } from "@/AppState";
 
 class KeepsService{
   
-  activateKeep(keepId){
+  activateKeep(keep){
     AppState.activeKeep = null
-    let activeKept = null
-    const activeKeep = AppState.keeps.find((keep) => keep.id == keepId)
-    if (!activeKeep){
-      activeKept = AppState.activeVaultKeeps.find((kept) => kept.id = keepId)
-    }
-    AppState.activeKeep = activeKeep ?? activeKept
+    AppState.activeKeep = keep
   }
 
   async createNewKeep(keepData) {

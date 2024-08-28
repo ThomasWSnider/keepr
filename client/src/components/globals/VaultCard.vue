@@ -8,7 +8,7 @@ defineProps({ vault: Vault })
 <template>
   <div class="position-relative vault-container mb-3">
     <RouterLink :to="{ name: 'Vault', params: { vaultId: vault.id } }">
-      <div class="selectable" data-bs-toggle="modal" data-bs-target="#vaultDetailsModal">
+      <div class="selectable">
         <img class=" img-fluid rounded shadow" :src="vault.img" :alt="vault.name" :title="`View ${vault.name}`">
         <div class=" vault-flavor d-flex align-items-center justify-content-between">
           <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ vault.name }}</p>

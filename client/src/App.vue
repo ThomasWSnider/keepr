@@ -2,7 +2,6 @@
 import Navbar from './components/Navbar.vue';
 import { AppState } from './AppState.js';
 import ModalWrapper from "./components/ModalWrapper.vue";
-import KeepDetails from "./components/globals/KeepDetails.vue";
 import NewKeepForm from "./components/globals/NewKeepForm.vue";
 import NewVaultForm from "./components/globals/NewVaultForm.vue";
 
@@ -16,9 +15,6 @@ import NewVaultForm from "./components/globals/NewVaultForm.vue";
   <main>
     <router-view />
   </main>
-  <ModalWrapper modal-id="keepDetailsModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
-    <KeepDetails />
-  </ModalWrapper>
   <ModalWrapper modal-id="newVaultFormModal" modal-size="modal-lg">
     <NewVaultForm />
   </ModalWrapper>

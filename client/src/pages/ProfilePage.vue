@@ -1,7 +1,9 @@
 <script setup>
 import { AppState } from "@/AppState";
 import KeepCard from "@/components/globals/KeepCard.vue";
+import KeepDetails from "@/components/globals/KeepDetails.vue";
 import VaultCard from "@/components/globals/VaultCard.vue";
+import ModalWrapper from "@/components/ModalWrapper.vue";
 import { profilesService } from "@/services/ProfilesService";
 import Pop from "@/utils/Pop";
 import { computed, onMounted } from "vue";
@@ -82,6 +84,9 @@ async function getProfileVaults() {
 
     </section>
   </div>
+  <ModalWrapper modal-id="keepDetailsModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
+    <KeepDetails />
+  </ModalWrapper>
 </template>
 
 

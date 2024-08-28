@@ -6,15 +6,13 @@ import { keepsService } from "@/services/KeepsService";
 import { vaultKeepsService } from "@/services/VaultKeepsService";
 import Pop from "@/utils/Pop";
 import { computed } from "vue";
-import { useRoute } from "vue-router";
 
 const account = computed(() => AppState.account)
-const route = useRoute()
 defineProps({ keep: [Kept, Keep], onProfile: Boolean })
 
 
-function activateKeep(keepId) {
-  keepsService.activateKeep(keepId)
+function activateKeep(keep) {
+  keepsService.activateKeep(keep)
 }
 
 async function destroyKeep(keepId) {
@@ -27,16 +25,6 @@ async function destroyKeep(keepId) {
   }
 }
 
-async function destroyVaultKeep(vaultKeepId) {
-  try {
-    const confirm = await Pop.confirm("Are you sure you want to delete this keep from your Vault?", "", "Confirm")
-    if (!confirm) return
-    const success = await vaultKeepsService.destroyVaultKeep(vaultKeepId)
-    Pop.success(success)
-  } catch (error) {
-    Pop.error(error);
-  }
-}
 </script>
 
 
@@ -44,12 +32,7 @@ async function destroyVaultKeep(vaultKeepId) {
   <div class="position-relative keep-container mb-3">
     <i v-if="account?.id == keep.creator.id && !keep.vaultKeepId" @click="destroyKeep(keep.id)" role="button"
       class="mdi mdi-close-circle" :title="`Delete ${keep.name}`"></i>
-
-    <i v-else-if="account?.id == keep.vaultKeepCreatorId && keep.vaultKeepId"
-      @click="destroyVaultKeep(keep.vaultKeepId)" role="button" class="mdi mdi-close-circle"
-      :title="`Delete ${keep.name}`"></i>
-
-    <div @click="activateKeep(keep.id)" class="selectable" data-bs-toggle="modal" data-bs-target="#keepDetailsModal">
+    <div @click="activateKeep(keep)" class="selectable" data-bs-toggle="modal" data-bs-target="#keepDetailsModal">
       <img class=" img-fluid rounded shadow" :src="keep.img" :alt="keep.name" :title="`View ${keep.name}`">
       <div class=" keep-flavor d-flex align-items-center justify-content-between">
         <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ keep.name }}</p>

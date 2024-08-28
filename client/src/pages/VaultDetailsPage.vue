@@ -1,6 +1,8 @@
 <script setup>
 import { AppState } from "@/AppState";
 import KeepCard from "@/components/globals/KeepCard.vue";
+import KeepDetails from "@/components/globals/KeepDetails.vue";
+import ModalWrapper from "@/components/ModalWrapper.vue";
 import { vaultsService } from "@/services/VaultsService";
 import Pop from "@/utils/Pop";
 import { computed, onMounted } from "vue";
@@ -83,7 +85,8 @@ async function destroyVault(vaultId) {
       <div class="row justify-content-center mb-4">
         <div class="col-3 d-flex justify-content-center">
           <div class="text-center rounded-pill bg-secondary px-2">
-            <p class="text-merriweather fs-4 px-1 mb-0">{{ vaultKeeps.length }} Keeps</p>
+            <p class="text-merriweather fs-4 px-1 mb-0">{{ vaultKeeps.length }} {{ vaultKeeps.length == 1 ? "Keep" :
+              "Keeps" }}</p>
           </div>
         </div>
       </div>
@@ -94,6 +97,9 @@ async function destroyVault(vaultId) {
       </div>
     </div>
   </div>
+  <ModalWrapper modal-id="keepDetailsModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
+    <KeepDetails />
+  </ModalWrapper>
 </template>
 
 

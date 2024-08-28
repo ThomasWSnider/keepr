@@ -43,12 +43,13 @@ async function createNewVault() {
           </div>
           <div class="col-12">
             <div class="form-floating mb-3">
-              <input v-model="editableVaultData.name" type="text" class="form-control" id="name" placeholder="Name">
+              <input v-model="editableVaultData.name" type="text" class="form-control" id="name" placeholder="Name"
+                maxlength="255" required>
               <label for="name">Name</label>
             </div>
             <div class="form-floating mb-5">
-              <input v-model="editableVaultData.img" type="url" class="form-control" id="imgUrl"
-                placeholder="Image Url">
+              <input v-model="editableVaultData.img" type="url" class="form-control" id="imgUrl" placeholder="Image Url"
+                maxlength="1000" required>
               <label for="imgUrl">Image Url</label>
             </div>
           </div>
