@@ -31,7 +31,8 @@ async function destroyVaultKeep(vaultKeepId) {
   try {
     const confirm = await Pop.confirm("Are you sure you want to delete this keep from your Vault?", "", "Confirm")
     if (!confirm) return
-    await vaultKeepsService.destroyVaultKeep(vaultKeepId)
+    const success = await vaultKeepsService.destroyVaultKeep(vaultKeepId)
+    Pop.success(success)
   } catch (error) {
     Pop.error(error);
   }

@@ -10,15 +10,13 @@ const keep = computed(() => AppState.activeKeep)
 
 const editableVaultKeepData = ref({
   vaultId: "",
-  keepId: keep.value?.id
 })
 
-async function saveKeep() {
+async function saveKeep(keepId) {
   try {
-    const success = await vaultKeepsService.saveKeep(editableVaultKeepData.value)
+    const success = await vaultKeepsService.saveKeep(editableVaultKeepData.value, keepId)
     editableVaultKeepData.value = {
       vaultId: "",
-      keepId: keep.value?.id
     }
     Pop.success(success)
   } catch (error) {
@@ -46,7 +44,7 @@ async function saveKeep() {
         </div>
         <div class="row justify-content-between align-items-center mb-3">
 
-          <form @submit.prevent="saveKeep()" class="col-7" v-if="account">
+          <form @submit.prevent="saveKeep(keep.id)" class="col-7" v-if="account">
             <div class="d-flex">
               <select v-model="editableVaultKeepData.vaultId" class="form-select rounded-end-0"
                 aria-label="Select Vault">

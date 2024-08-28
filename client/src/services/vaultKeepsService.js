@@ -1,14 +1,17 @@
-import { logger } from "@/utils/Logger"
 import { api } from "./AxiosService"
 import { AppState } from "@/AppState"
 
 
 class VaultKeepsService {
-  destroyVaultKeep(vaultKeepId) {
-    logger.log(`I understand that you are looking for a kept rather than a keep with the id of ${vaultKeepId}`)
-  }
+  async destroyVaultKeep(vaultKeepId) {
+    const response = await api.delete(`api/vaultKeeps/${vaultKeepId}`)
+    const keptIndex = AppState.ActiveVaultKeeps.findIndex((kept) => kept.id == vaultKeepId)
+    AppState.ActiveVaultKeeps.splice(keptIndex, 1)
+    return response.data
+    }
   
-  async saveKeep(vaultKeepData) {
+  async saveKeep(vaultKeepData, keepId) {
+    vaultKeepData.keepId = keepId
     await api.post(`api/vaultKeeps`, vaultKeepData)
     const vault = AppState.accountVaults.find((vault) => vault.id == vaultKeepData.vaultId)
     return `Keep Saved To ${vault.name}`
