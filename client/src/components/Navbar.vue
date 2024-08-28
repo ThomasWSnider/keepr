@@ -40,12 +40,13 @@ function toggleTheme() {
             </button>
             <ul class="dropdown-menu py-1">
               <li>
-                <p class="dropdown-item m-0 " data-bs-toggle="modal" data-bs-target="#newKeepFormModal">New
-                  Keep</p>
+                <p class="dropdown-item m-0 " data-bs-toggle="modal" data-bs-target="#newKeepFormModal">
+                  New Keep
+                </p>
               </li>
               <hr class="m-1">
               <li>
-                <p class="dropdown-item m-0">New Vault</p>
+                <p class="dropdown-item m-0" data-bs-toggle="modal" data-bs-target="#newVaultFormModal">New Vault</p>
               </li>
             </ul>
           </div>

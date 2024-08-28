@@ -4,6 +4,7 @@ import { AppState } from './AppState.js';
 import ModalWrapper from "./components/ModalWrapper.vue";
 import KeepDetails from "./components/globals/KeepDetails.vue";
 import NewKeepForm from "./components/globals/NewKeepForm.vue";
+import NewVaultForm from "./components/globals/NewVaultForm.vue";
 
 
 </script>
@@ -15,10 +16,13 @@ import NewKeepForm from "./components/globals/NewKeepForm.vue";
   <main>
     <router-view />
   </main>
-  <ModalWrapper modal-id="keepDetailsModal">
+  <ModalWrapper modal-id="keepDetailsModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
     <KeepDetails />
   </ModalWrapper>
-  <ModalWrapper modal-id="newKeepFormModal">
+  <ModalWrapper modal-id="newVaultFormModal" modal-size="modal-lg">
+    <NewVaultForm />
+  </ModalWrapper>
+  <ModalWrapper modal-id="newKeepFormModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
     <NewKeepForm />
   </ModalWrapper>
 </template>

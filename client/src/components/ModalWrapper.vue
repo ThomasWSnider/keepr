@@ -1,12 +1,12 @@
 <script setup>
 
-defineProps({ modalId: String })
+defineProps({ modalId: String, modalSize: String })
 </script>
 
 
 <template>
   <div class="modal fade" :id="`${modalId}`" tabindex="-1" :aria-labelledby="`${modalId}Label`" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-lg modal-fullscreen-md-down">
+    <div class="modal-dialog" :class="modalSize">
       <div class="modal-content">
         <slot>
         </slot>
