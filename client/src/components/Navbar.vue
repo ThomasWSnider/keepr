@@ -3,39 +3,32 @@ import { computed, onMounted, ref } from 'vue';
 import { loadState, saveState } from '../utils/Store.js';
 import Login from './Login.vue';
 import { AppState } from "@/AppState.js";
+import { useRouter } from "vue-router";
 
-const theme = ref(loadState('theme') || 'light')
 const account = computed(() => AppState.account)
+const router = useRouter()
 
-onMounted(() => {
-  document.documentElement.setAttribute('data-bs-theme', theme.value)
-})
-
-function toggleTheme() {
-  theme.value = theme.value == 'light' ? 'dark' : 'light'
-  document.documentElement.setAttribute('data-bs-theme', theme.value)
-  saveState('theme', theme.value)
+function pushToProfile() {
+  router.push({ name: 'Profile', params: { profileId: account.value.id } })
 }
+
+
 
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-transparent shadow px-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="/img/cw-logo.png" height="45" />
-      </div>
-    </router-link>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
-      aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-sm bg-transparent shadow px-3">
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
+          <button v-if="account" @click="pushToProfile" class="btn btn-secondary rounded-pill fw-semibold">
+            My Profile
+          </button>
+        </li>
+        <li>
           <div v-if="account" class="dropdown">
-            <button class="btn btn-secondary-outline dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+            <button class="btn btn-secondary-outline dropdown-toggle fw-semibold" type="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
               Create
             </button>
             <ul class="dropdown-menu py-1">
@@ -46,21 +39,21 @@ function toggleTheme() {
               </li>
               <hr class="m-1">
               <li>
-                <p class="dropdown-item m-0" data-bs-toggle="modal" data-bs-target="#newVaultFormModal">New Vault</p>
+                <p class="dropdown-item m-0" data-bs-toggle="modal" data-bs-target="#newVaultFormModal">New Vault
+                </p>
               </li>
             </ul>
           </div>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
-      <div>
-        <button class="btn text-light" @click="toggleTheme"
-          :title="`Enable ${theme == 'light' ? 'dark' : 'light'} theme.`">
-          <Icon :name="theme == 'light' ? 'weather-sunny' : 'weather-night'" />
-        </button>
-      </div>
-      <Login />
     </div>
+    <router-link class="navbar-brand d-flex position-absolute" :to="{ name: 'Home' }">
+      <div class="d-flex flex-column align-items-center">
+        <img alt="logo" src="/img/keeprlogo.png" height="100" />
+      </div>
+    </router-link>
+    <!-- LOGIN COMPONENT HERE -->
+    <Login />
   </nav>
 </template>
 
@@ -77,6 +70,11 @@ a:hover {
   border-bottom: 2px solid var(--bs-success);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+}
+
+a {
+  left: 50%;
+  transform: translate(-50%)
 }
 
 @media screen and (min-width: 576px) {
