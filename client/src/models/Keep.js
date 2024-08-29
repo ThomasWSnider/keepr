@@ -8,7 +8,7 @@ export class Keep extends DbItem{
       this.description = data.description
       this.img = data.img
       this.views = data.views
-      this.kept = data.kept
+      this.keepCount = data.keepCount
       this.creatorId = data.creatorId
       this.creator = new Profile(data.creator)
   }

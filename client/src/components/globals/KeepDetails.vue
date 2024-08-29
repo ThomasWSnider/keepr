@@ -16,9 +16,9 @@ const editableVaultKeepData = ref({
   vaultId: "",
 })
 
-async function saveKeep(keepId) {
+async function saveKeep(keep) {
   try {
-    const success = await vaultKeepsService.saveKeep(editableVaultKeepData.value, keepId)
+    const success = await vaultKeepsService.saveKeep(editableVaultKeepData.value, keep)
     editableVaultKeepData.value = {
       vaultId: "",
     }
@@ -51,7 +51,8 @@ async function destroyVaultKeep(vaultKeepId) {
       <div class="col-md-6 col-12 d-flex flex-column justify-content-between">
         <div class="d-flex justify-content-center mt-4">
           <p class="fw-semibold fs-5 mb-0 me-5 text-secondary"><i class="mdi mdi-eye-outline"></i> {{ keep.views }}</p>
-          <p class="fw-semibold fs-5 mb-0 text-secondary"><i class="mdi mdi-alpha-k-box-outline"></i> {{ keep.kept }}
+          <p class="fw-semibold fs-5 mb-0 text-secondary"><i class="mdi mdi-alpha-k-box-outline"></i> {{ keep.keepCount
+            }}
           </p>
         </div>
         <div>
@@ -60,7 +61,7 @@ async function destroyVaultKeep(vaultKeepId) {
         </div>
         <div class="row justify-content-between align-items-center mb-3">
 
-          <form @submit.prevent="saveKeep(keep.id)" class="col-7" v-if="account && route.name != 'Vault'">
+          <form @submit.prevent="saveKeep(keep)" class="col-7" v-if="account && route.name != 'Vault'">
             <div class="d-flex">
               <select v-model="editableVaultKeepData.vaultId" class="form-select rounded-end-0"
                 aria-label="Select Vault" required>
@@ -119,5 +120,6 @@ async function destroyVaultKeep(vaultKeepId) {
 
 p {
   overflow-wrap: break-word;
+  overflow-y: hidden;
 }
 </style>
