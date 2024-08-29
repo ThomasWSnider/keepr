@@ -1,26 +1,77 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { AppState } from '../AppState.js';
 
 const account = computed(() => AppState.account)
 
+const editableAccountData = ref({
+  name: account.value.name,
+  picture: account.value.picture,
+  coverImg: account.value.coverImg
+})
+
 </script>
 
 <template>
-  <div class="about text-center">
-    <div v-if="account">
-      <h1>Welcome {{ account.name }}</h1>
-      <img class="rounded" :src="account.picture" alt="" />
-      <p>{{ account.email }}</p>
-    </div>
-    <div v-else>
-      <h1>Loading... <i class="mdi mdi-loading mdi-spin"></i></h1>
-    </div>
+  <div v-if="account" class="container">
+    <section class="row justify-content-center mt-5 mb-3">
+      <div class="col-10">
+        <div class="cover-img shadow rounded">
+          <div class="row justify-content-center">
+            <div class="col-4 text-center profile-info mt-5">
+              <img class="profile-img shadow mt-lg-3" :src="account.picture" :alt="account.name">
+              <p class="fs-1 fw-bold mb-0 text-light">{{ account.name }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-10 mt-3">
+        <section class="row justify-content-between align-items-center">
+          <div class="col-lg-6 mb-3">
+            <label for="name">Name</label>
+            <input v-model="editableAccountData.name" type="text" class="form-control" id="name" placeholder="Name">
+          </div>
+          <div class="col-lg-6 mb-3">
+            <label for="picture">Picture</label>
+            <input v-model="editableAccountData.picture" type="url" class="form-control" id="picture"
+              placeholder="Picture">
+          </div>
+          <div class="col-lg-6 mb-3">
+            <label for="coverImg">Cover Image</label>
+            <input v-model="editableAccountData.coverImg" type="url" class="form-control" id="coverImg"
+              placeholder="Cover Image">
+          </div>
+          <div class="col-lg-6 mb-3 py-0">
+            <div class="d-grid">
+              <button class="btn btn-secondary mt-4 py-lg-0 fw-semibold">Submit Changes</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
   </div>
 </template>
 
 <style scoped lang="scss">
-img {
-  max-width: 100px;
+.cover-img {
+  background-image: v-bind('account?.coverImgUrl');
+  background-size: cover;
+  background-position: center;
+  height: 45dvh;
+}
+
+.profile-info {
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: #040404;
+}
+
+.profile-img {
+  height: 20dvh;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+}
+
+button {
+  height: 38px;
 }
 </style>

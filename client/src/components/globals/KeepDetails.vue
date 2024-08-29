@@ -43,25 +43,27 @@ async function destroyVaultKeep(vaultKeepId) {
 
 
 <template>
-  <div v-if="keep" class="modal-body pe-3 container-fluid p-0">
-    <section class="row">
-      <div class="col-md-6 col-12 p-0">
-        <img class="img-fluid rounded-start keep-img" :src="keep.img" :alt="keep.name">
-      </div>
-      <div class="col-md-6 col-12 d-flex flex-column justify-content-between">
-        <div class="d-flex justify-content-center mt-4">
-          <p class="fw-semibold fs-5 mb-0 me-5 text-secondary"><i class="mdi mdi-eye-outline"></i> {{ keep.views }}</p>
-          <p class="fw-semibold fs-5 mb-0 text-secondary"><i class="mdi mdi-alpha-k-box-outline"></i> {{ keep.keepCount
+  <div v-if="keep" class="modal-body px-3 pe-lg-3 container-fluid p-0 position-relative">
+    <section class="row align-items-between">
+      <img class="img-fluid rounded-start keep-img position-absolute" :src="keep.img" :alt="keep.name">
+      <div class="col-md-6 col-12 p-0 space"></div>
+      <div class="col-md-6 col-12 keep-details">
+        <div class="row justify-content-center align-items-between mt-4">
+          <div class="col-12 d-flex justify-content-center">
+            <p class="fw-semibold fs-5 mb-0 me-5 text-secondary"><i class="mdi mdi-eye-outline"></i> {{ keep.views }}
+            </p>
+            <p class="fw-semibold fs-5 mb-0 text-secondary"><i class="mdi mdi-alpha-k-box-outline"></i> {{
+              keep.keepCount
             }}
-          </p>
-        </div>
-        <div>
+            </p>
+          </div>
           <p class="fs-2 fw-bold text-center">{{ keep.name }}</p>
           <p class="px-4">{{ keep.description }}</p>
         </div>
         <div class="row justify-content-between align-items-center mb-3">
 
-          <form @submit.prevent="saveKeep(keep)" class="col-7" v-if="account && route.name != 'Vault'">
+          <form @submit.prevent="saveKeep(keep)" class="col-10 col-lg-7 mx-auto mb-3 m-lg-0"
+            v-if="account && route.name != 'Vault'">
             <div class="d-flex">
               <select v-model="editableVaultKeepData.vaultId" class="form-select rounded-end-0"
                 aria-label="Select Vault" required>
@@ -76,13 +78,18 @@ async function destroyVaultKeep(vaultKeepId) {
                 class="mdi mdi-cancel"></i>
               Remove Keep</p>
           </div>
-          <div class="col-5 pe-1 d-flex align-items-center justify-content-center">
+          <div class="col-12 col-lg-5 pe-1 mb-3 d-flex align-items-center justify-content-center">
             <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
               <img class="creator-img selectable me-1" :src="keep.creator.picture" :alt="keep.creator.name"
                 :title="`Go to ${keep.creator.name}'s profile page`" data-bs-toggle="modal"
                 data-bs-target="#keepDetailsModal">
             </RouterLink>
             <p class="mb-0 fw-semibold">{{ keep.creator.name }}</p>
+          </div>
+          <div class="col-10 d-grid d-lg-none mx-auto">
+            <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#keepDetailsModal">Close</button>
+          </div>
+          <div>
           </div>
         </div>
       </div>
@@ -99,8 +106,34 @@ async function destroyVaultKeep(vaultKeepId) {
 }
 
 .keep-img {
-  height: 80dvh;
+  height: 100%;
+  width: 50%;
+  padding-left: 0;
   object-fit: cover;
+  left: 0;
+  top: 0;
+
+  @media screen and (max-width: 767.98px) {
+    height: 33dvh;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.space {
+  @media screen and (max-width: 767.98px) {
+    height: 33dvh;
+  }
+}
+
+.keep-details {
+  @media screen and (max-width: 767.98px) {
+    height: 66dvh;
+
+    .row {
+      height: 30dvh;
+    }
+  }
 }
 
 .remove-keep-btn {

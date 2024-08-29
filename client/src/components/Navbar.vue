@@ -17,7 +17,7 @@ function pushToProfile() {
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-sm bg-transparent shadow px-3">
+  <nav class="navbar d-none d-md-flex navbar-expand-sm bg-transparent shadow px-3">
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
@@ -55,6 +55,32 @@ function pushToProfile() {
     <!-- LOGIN COMPONENT HERE -->
     <Login />
   </nav>
+  <nav class="nav-mobile d-flex d-md-none bg-light justify-content-between align-items-center">
+    <div v-if="account" class="dropdown">
+      <button class="btn btn-secondary-outline dropdown-toggle fw-semibold" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Create
+      </button>
+      <ul class="dropdown-menu py-1">
+        <li>
+          <p class="dropdown-item m-0 " data-bs-toggle="modal" data-bs-target="#newKeepFormModal">
+            New Keep
+          </p>
+        </li>
+        <hr class="m-1">
+        <li>
+          <p class="dropdown-item m-0" data-bs-toggle="modal" data-bs-target="#newVaultFormModal">New Vault
+          </p>
+        </li>
+      </ul>
+    </div>
+    <router-link class="navbar-brand d-flex position-md-absolute" :to="{ name: 'Home' }">
+      <div class="d-flex flex-column align-items-center">
+        <img alt="logo" src="/img/keeprlogo.png" height="100" />
+      </div>
+    </router-link>
+    <Login />
+  </nav>
 </template>
 
 <style scoped>
@@ -72,6 +98,10 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 
+.dropdown {
+  height: 37px;
+}
+
 a {
   left: 50%;
   transform: translate(-50%)
@@ -87,5 +117,13 @@ li {
   p {
     user-select: none;
   }
+}
+
+.nav-mobile {
+  position: fixed;
+  bottom: 0;
+  height: 64px;
+  width: 100dvw;
+  z-index: 1;
 }
 </style>

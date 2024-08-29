@@ -52,7 +52,7 @@ async function getProfileVaults() {
       <div class="col-10 mb-5">
         <div class="cover-img shadow rounded position-relative">
           <div class="row">
-            <div class="col-4 text-center profile-info">
+            <div class="col-lg-4 col-10 text-center profile-info">
               <img class="profile-img shadow" :src="profile.picture" :alt="profile.name">
               <p class="fs-3 fw-bold mb-0">{{ profile.name }}</p>
               <p class="fw-semibold">{{ profileVaults.length }} Vaults | {{ profileKeeps.length }} Keeps</p>
@@ -109,6 +109,10 @@ async function getProfileVaults() {
   bottom: -45%;
   left: 50%;
   transform: translate(-50%);
+
+  @media screen and (max-width: 767.98px) {
+    bottom: -35%;
+  }
 }
 
 .masonry {

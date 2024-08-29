@@ -38,7 +38,6 @@ async function createNewKeep() {
         <div class="col-12">
           <p class="fs-1 fw-semibold">Add your keep</p>
         </div>
-
         <form @submit.prevent="createNewKeep()" class="row">
           <div class="col-12 order-1">
             <div class="mb-3 form-floating">
@@ -85,7 +84,6 @@ async function createNewKeep() {
             <button type="submit" class="btn btn-secondary">Create</button>
           </div>
         </form>
-
       </section>
     </div>
   </div>

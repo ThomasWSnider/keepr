@@ -55,7 +55,7 @@ async function createNewVault() {
           </div>
         </section>
         <section class="row justify-content-end">
-          <div class="col-5 d-flex flex-column justify-content-center text-center">
+          <div class="col-md-5 col-12 d-flex flex-column justify-content-center text-center">
             <small>Private Vaults can only be seen by you</small>
             <div class="form-check d-flex align-items-center justify-content-center">
               <input v-model="editableVaultData.isPrivate" class="form-check-input me-2" type="checkbox" id="isPrivate">
