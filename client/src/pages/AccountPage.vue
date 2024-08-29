@@ -1,6 +1,8 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { AppState } from '../AppState.js';
+import Pop from "@/utils/Pop.js";
+import { accountService } from "@/services/AccountService.js";
 
 const account = computed(() => AppState.account)
 
@@ -10,6 +12,21 @@ const editableAccountData = ref({
   coverImg: account.value.coverImg
 })
 
+async function editAccountInfo() {
+  try {
+    const confirm = await Pop.confirm("Are you sure you wish to update your Account information?")
+    if (!confirm) return
+    await accountService.editAccountInfo(editableAccountData.value)
+    editableAccountData.value = {
+      name: account.value.name,
+      picture: account.value.picture,
+      coverImg: account.value.coverImg
+    }
+  } catch (error) {
+    Pop.error(error)
+  }
+}
+
 </script>
 
 <template>
@@ -18,14 +35,14 @@ const editableAccountData = ref({
       <div class="col-10">
         <div class="cover-img shadow rounded">
           <div class="row justify-content-center">
-            <div class="col-4 text-center profile-info mt-5">
+            <div class="col-10 text-center profile-info mt-5">
               <img class="profile-img shadow mt-lg-3" :src="account.picture" :alt="account.name">
               <p class="fs-1 fw-bold mb-0 text-light">{{ account.name }}</p>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-10 mt-3">
+      <form @submit.prevent="editAccountInfo()" class="col-10 mt-3 mb-5">
         <section class="row justify-content-between align-items-center">
           <div class="col-lg-6 mb-3">
             <label for="name">Name</label>
@@ -43,11 +60,11 @@ const editableAccountData = ref({
           </div>
           <div class="col-lg-6 mb-3 py-0">
             <div class="d-grid">
-              <button class="btn btn-secondary mt-4 py-lg-0 fw-semibold">Submit Changes</button>
+              <button class="btn btn-secondary mt-4 py-lg-0 fw-semibold" type="submit">Submit Changes</button>
             </div>
           </div>
         </section>
-      </div>
+      </form>
     </section>
   </div>
 </template>

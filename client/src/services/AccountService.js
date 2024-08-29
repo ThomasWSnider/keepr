@@ -4,6 +4,13 @@ import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class AccountService {
+  async editAccountInfo(editableAccountData) {
+    await api.put(`account`, editableAccountData)
+    let account = AppState.account
+    account.name = editableAccountData.name ?? account.name
+    account.picture = editableAccountData.picture ?? account.picture
+    account.coverImg = editableAccountData.coverImg ?? account.coverImg
+  }
   async getAccount() {
     try {
       const res = await api.get('/account')
