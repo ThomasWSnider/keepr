@@ -34,8 +34,8 @@ async function logout() {
                 Manage Account
               </div>
             </router-link>
-            <router-link :to="{ name: 'Profile', params: { profileId: account?.id } }">
-              <div class="list-group-item dropdown-item list-group-item-action">
+            <router-link v-if="account" :to="{ name: 'Profile', params: { profileId: account?.id } }">
+              <div class="d-md-none list-group-item dropdown-item list-group-item-action">
                 Profile Page
               </div>
             </router-link>

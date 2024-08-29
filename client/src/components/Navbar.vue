@@ -55,7 +55,7 @@ function pushToProfile() {
     <!-- LOGIN COMPONENT HERE -->
     <Login />
   </nav>
-  <nav class="nav-mobile d-flex d-md-none bg-light justify-content-between align-items-center">
+  <nav class="nav-mobile d-flex d-md-none bg-light justify-content-around align-items-center">
     <div v-if="account" class="dropdown">
       <button class="btn btn-secondary-outline dropdown-toggle fw-semibold" type="button" data-bs-toggle="dropdown"
         aria-expanded="false">
