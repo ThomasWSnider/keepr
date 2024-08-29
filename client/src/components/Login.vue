@@ -15,7 +15,7 @@ async function logout() {
 </script>
 
 <template>
-  <span class="navbar-text me-3">
+  <span class="navbar-text ms-auto me-3">
     <button class="btn selectable text-success lighten-30 text-uppercase my-2 my-lg-0" @click="login" v-if="!identity">
       Login
     </button>

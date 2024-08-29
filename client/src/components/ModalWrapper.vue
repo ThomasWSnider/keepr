@@ -16,4 +16,15 @@ defineProps({ modalId: String, modalSize: String })
 </template>
 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.modal-content {
+  --bs-modal-width: 80dvw
+}
+
+@media (min-width: 768px) {
+  .modal-dialog {
+    --bs-modal-width: 80dvw;
+    max-width: 85dvw;
+  }
+}
+</style>

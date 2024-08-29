@@ -13,7 +13,7 @@ class VaultKeepsService {
   async saveKeep(vaultKeepData, keep) {
     vaultKeepData.keepId = keep.id
     await api.post(`api/vaultKeeps`, vaultKeepData)
-    keep.keepCount++
+    keep.kept++
     const vault = AppState.accountVaults.find((vault) => vault.id == vaultKeepData.vaultId)
     return `Keep Saved To ${vault.name}`
   }

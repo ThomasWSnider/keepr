@@ -36,7 +36,7 @@ async function createNewVault() {
       <form @submit.prevent="createNewVault()">
         <section class="row justify-content-center">
           <div class="col-12 text-end">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" title="Close" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="col-12 text-center">
             <p class="fs-1 fw-semibold">Add New Vault</p>
@@ -64,7 +64,7 @@ async function createNewVault() {
               </label>
             </div>
             <div class="d-grid mt-3">
-              <button class="btn btn-secondary fs-5 fw-bold" type="submit">Create Vault</button>
+              <button class="btn btn-secondary fs-5 fw-bold" title="Create Vault" type="submit">Create Vault</button>
             </div>
           </div>
         </section>

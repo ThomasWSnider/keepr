@@ -14,7 +14,7 @@ defineProps({ vault: Vault })
           <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ vault.name }}</p>
         </div>
         <div v-if="vault.isPrivate" class="private-icon">
-          <p><i class="mdi mdi-lock text-light fs-3"></i></p>
+          <p title="This vault is private"><i class="mdi mdi-lock text-light fs-3"></i></p>
         </div>
       </div>
     </RouterLink>

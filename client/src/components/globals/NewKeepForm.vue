@@ -81,7 +81,7 @@ async function createNewKeep() {
             </div>
           </div>
           <div class="col-12 order-5 text-end mb-3">
-            <button type="submit" class="btn btn-secondary">Create</button>
+            <button type="submit" title="Submit" class="btn btn-secondary">Submit</button>
           </div>
         </form>
       </section>

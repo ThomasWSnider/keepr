@@ -15,10 +15,13 @@ import NewVaultForm from "./components/globals/NewVaultForm.vue";
   <main>
     <router-view />
   </main>
+  <footer>
+
+  </footer>
   <ModalWrapper modal-id="newVaultFormModal" modal-size="modal-lg">
     <NewVaultForm />
   </ModalWrapper>
-  <ModalWrapper modal-id="newKeepFormModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
+  <ModalWrapper modal-id="newKeepFormModal" modal-size="modal-xl modal-lg">
     <NewKeepForm />
   </ModalWrapper>
 </template>

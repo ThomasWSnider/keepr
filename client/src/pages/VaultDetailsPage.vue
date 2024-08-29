@@ -97,7 +97,7 @@ async function destroyVault(vaultId) {
       </div>
     </div>
   </div>
-  <ModalWrapper modal-id="keepDetailsModal" modal-size="modal-xl modal-lg modal-fullscreen-md-down">
+  <ModalWrapper modal-id="keepDetailsModal" modal-size="modal-xl modal-fullscreen-sm-down">
     <KeepDetails />
   </ModalWrapper>
 </template>

@@ -49,16 +49,16 @@ function pushToProfile() {
     </div>
     <router-link class="navbar-brand d-flex position-absolute" :to="{ name: 'Home' }">
       <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="/img/keeprlogo.png" height="100" />
+        <img alt="logo" src="/img/keeprlogo.png" />
       </div>
     </router-link>
     <!-- LOGIN COMPONENT HERE -->
     <Login />
   </nav>
-  <nav class="nav-mobile d-flex d-md-none bg-light justify-content-around align-items-center">
-    <div v-if="account" class="dropdown">
-      <button class="btn btn-secondary-outline dropdown-toggle fw-semibold" type="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
+  <nav class="nav-mobile d-flex d-md-none bg-light align-items-center" :class="{ 'justify-content-between': !account }">
+    <div v-if="account" class="dropdown ms-3">
+      <button class="btn btn-secondary rounded-pill fw-semibold position-absolute start-0" type="button"
+        data-bs-toggle="dropdown" aria-expanded="false">
         Create
       </button>
       <ul class="dropdown-menu py-1">
@@ -74,10 +74,9 @@ function pushToProfile() {
         </li>
       </ul>
     </div>
-    <router-link class="navbar-brand d-flex position-md-absolute" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="/img/keeprlogo.png" height="100" />
-      </div>
+    <router-link class="navbar-brand d-flex mx-md-auto text-center position-fixed left-50 translate-middle"
+      :class="{ 'mx-auto': account }" :to="{ name: 'Home' }">
+      <img alt="logo" src="/img/keeprlogo.png" />
     </router-link>
     <Login />
   </nav>
@@ -98,6 +97,13 @@ a:hover {
   border-bottom-right-radius: 0;
 }
 
+@media screen and (max-width: 767.98px) {
+
+  .navbar-brand {
+    bottom: -57px;
+  }
+}
+
 .dropdown {
   height: 37px;
 }
@@ -113,6 +119,15 @@ a {
   }
 }
 
+img {
+  height: 100px;
+
+  @media screen and (max-width: 767.98px) {
+    height: 80px;
+  }
+}
+
+
 li {
   p {
     user-select: none;
@@ -122,7 +137,7 @@ li {
 .nav-mobile {
   position: fixed;
   bottom: 0;
-  height: 64px;
+  height: 45px;
   width: 100dvw;
   z-index: 1;
 }
