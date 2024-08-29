@@ -44,7 +44,7 @@ async function createNewVault() {
           <div class="col-12">
             <div class="form-floating mb-3">
               <input v-model="editableVaultData.name" type="text" class="form-control" id="name" placeholder="Name"
-                maxlength="255" required>
+                maxlength="47" required>
               <label for="name">Name</label>
             </div>
             <div class="form-floating mb-5">

@@ -96,6 +96,9 @@ i {
 p {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #040404;
+  overflow-wrap: break-word;
   margin: 0;
+  overflow: hidden;
+  max-height: 3em;
 }
 </style>

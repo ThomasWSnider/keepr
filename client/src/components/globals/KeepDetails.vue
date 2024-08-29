@@ -76,8 +76,11 @@ async function destroyVaultKeep(vaultKeepId) {
               Remove Keep</p>
           </div>
           <div class="col-5 pe-1 d-flex align-items-center justify-content-center">
-            <img class="creator-img selectable me-1" :src="keep.creator.picture" :alt="keep.creator.name"
-              :title="`Go to ${keep.creator.name}'s profile page`">
+            <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
+              <img class="creator-img selectable me-1" :src="keep.creator.picture" :alt="keep.creator.name"
+                :title="`Go to ${keep.creator.name}'s profile page`" data-bs-toggle="modal"
+                data-bs-target="#keepDetailsModal">
+            </RouterLink>
             <p class="mb-0 fw-semibold">{{ keep.creator.name }}</p>
           </div>
         </div>
@@ -112,5 +115,9 @@ async function destroyVaultKeep(vaultKeepId) {
     text-decoration: underline;
     filter: hue-rotate(330deg);
   }
+}
+
+p {
+  overflow-wrap: break-word;
 }
 </style>

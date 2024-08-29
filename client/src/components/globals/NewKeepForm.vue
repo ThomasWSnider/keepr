@@ -108,6 +108,7 @@ textarea {
   overflow-wrap: break-word;
   margin: 0;
   overflow: hidden;
+  max-height: 3em;
 }
 
 .img-preview {

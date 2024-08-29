@@ -9,7 +9,7 @@ defineProps({ vault: Vault })
   <div class="position-relative vault-container mb-3">
     <RouterLink :to="{ name: 'Vault', params: { vaultId: vault.id } }">
       <div class="selectable">
-        <img class=" img-fluid rounded shadow" :src="vault.img" :alt="vault.name" :title="`View ${vault.name}`">
+        <img class="img-fluid rounded shadow" :src="vault.img" :alt="vault.name" :title="`View ${vault.name}`">
         <div class=" vault-flavor d-flex align-items-center justify-content-between">
           <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ vault.name }}</p>
         </div>
@@ -30,6 +30,12 @@ defineProps({ vault: Vault })
   left: 10px;
 }
 
+img {
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
 .private-icon {
   position: absolute;
   bottom: 5px;
@@ -39,6 +45,9 @@ defineProps({ vault: Vault })
 p {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: #040404;
+  overflow-wrap: break-word;
   margin: 0;
+  overflow: hidden;
+  max-height: 3em;
 }
 </style>
