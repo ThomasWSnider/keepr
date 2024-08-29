@@ -12,6 +12,7 @@ class KeepsService{
   async createNewKeep(keepData) {
     const response = await api.post("api/keeps", keepData)
     const newKeep = new Keep(response.data)
+    // @ts-ignore
     AppState.keeps.unshift(newKeep)
   }
   
@@ -22,6 +23,7 @@ class KeepsService{
   }
 
   async getAllKeeps(){
+    AppState.keeps.length = 0
     const response = await api.get('api/keeps')
     const keeps = response.data.map((keepPOJO) => new Keep(keepPOJO))
     AppState.keeps = keeps

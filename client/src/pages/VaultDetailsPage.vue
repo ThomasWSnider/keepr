@@ -9,7 +9,7 @@ import { computed, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const vault = computed(() => AppState.activeVault)
-const vaultKeeps = computed(() => AppState.activeVaultKeeps)
+const vaultKeeps = computed(() => AppState.keeps)
 const account = computed(() => AppState.account)
 const route = useRoute()
 const router = useRouter()

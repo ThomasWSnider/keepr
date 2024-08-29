@@ -9,8 +9,8 @@ class ProfilesService{
 
   async getProfileData(profileId){
     AppState.focusedProfile = null
-    AppState.profileKeeps.length = 0
-    AppState.profileVaults.length = 0
+    AppState.keeps = []
+    AppState.profileVaults = []
     const response = await api.get(`api/profiles/${profileId}`)
     const focusedProfile = new Profile(response.data)
     AppState.focusedProfile = focusedProfile
@@ -19,7 +19,7 @@ class ProfilesService{
   async getProfileKeeps(profileId){
     const response = await api.get(`api/profiles/${profileId}/keeps`)
     const profileKeeps = response.data.map((keep) => new Keep(keep))
-    AppState.profileKeeps = profileKeeps
+    AppState.keeps = profileKeeps
   }
   
   async getProfileVaults(profileId){

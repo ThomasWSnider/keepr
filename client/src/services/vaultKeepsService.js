@@ -5,8 +5,8 @@ import { AppState } from "@/AppState"
 class VaultKeepsService {
   async destroyVaultKeep(vaultKeepId) {
     const response = await api.delete(`api/vaultKeeps/${vaultKeepId}`)
-    const keptIndex = AppState.activeVaultKeeps.findIndex((kept) => kept.id == vaultKeepId)
-    AppState.activeVaultKeeps.splice(keptIndex, 1)
+    const keptIndex = AppState.keeps.findIndex((kept) => kept.id == vaultKeepId)
+    AppState.keeps.splice(keptIndex, 1)
     return response.data
     }
   

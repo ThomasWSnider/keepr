@@ -10,7 +10,7 @@ import { computed, onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 const profile = computed(() => AppState.focusedProfile)
-const profileKeeps = computed(() => AppState.profileKeeps)
+const profileKeeps = computed(() => AppState.keeps)
 const profileVaults = computed(() => AppState.profileVaults)
 const route = useRoute()
 

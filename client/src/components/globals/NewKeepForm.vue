@@ -40,14 +40,14 @@ async function createNewKeep() {
         </div>
 
         <form @submit.prevent="createNewKeep()" class="row">
-          <div class="col-12 order-2">
+          <div class="col-12 order-1">
             <div class="mb-3 form-floating">
               <input v-model="editableKeepData.name" type="text" class="form-control" id="name"
                 placeholder="Name Your Keep" maxlength="47" required>
               <label for="name" class="form-label">Title</label>
             </div>
           </div>
-          <div class="col-12 order-1">
+          <div class="col-12 order-2">
             <div class="mb-3 form-floating">
               <input v-model="editableKeepData.img" type="url" class="form-control" id="img"
                 placeholder="Paste Image Here" maxlength="1000" required>
