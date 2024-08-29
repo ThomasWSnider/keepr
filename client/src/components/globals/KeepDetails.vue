@@ -53,7 +53,7 @@ async function destroyVaultKeep(vaultKeepId) {
             <p class="fw-semibold fs-5 mb-0 me-5 text-secondary"><i class="mdi mdi-eye-outline"></i> {{ keep.views }}
             </p>
             <p class="fw-semibold fs-5 mb-0 text-secondary"><i class="mdi mdi-alpha-k-box-outline"></i> {{
-              keep.keepCount
+              keep.kept
             }}
             </p>
           </div>

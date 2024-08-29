@@ -7,9 +7,9 @@ import { accountService } from "@/services/AccountService.js";
 const account = computed(() => AppState.account)
 
 const editableAccountData = ref({
-  name: account.value.name,
-  picture: account.value.picture,
-  coverImg: account.value.coverImg
+  name: account.value?.name,
+  picture: account.value?.picture,
+  coverImg: account.value?.coverImg
 })
 
 async function editAccountInfo() {

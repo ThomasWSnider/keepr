@@ -38,7 +38,11 @@ public class VaultKeepsService
 
   private VaultKeep GetVaultKeepById(int vaultKeepId)
   {
-    VaultKeep vaultKeep = _repository.GetById(vaultKeepId) ?? throw new Exception($"Now Vault Keep found with id of {vaultKeepId}");
+    VaultKeep vaultKeep = _repository.GetById(vaultKeepId);
+    if (vaultKeep == null)
+    {
+      throw new Exception($"Now Vault Keep found with id of {vaultKeepId}");
+    }
     return vaultKeep;
   }
 }

@@ -42,7 +42,7 @@ public class KeepsRepository : IRepository<Keep>
   public List<Keep> GetAll()
   {
     string sql = @"
-    SELECT keeps.*, COUNT(vaultKeeps.id) AS keepCount, accounts.*
+    SELECT keeps.*, COUNT(vaultKeeps.id) AS kept, accounts.*
     FROM keeps
     JOIN accounts ON accounts.id = keeps.creatorId
     LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
@@ -56,7 +56,7 @@ public class KeepsRepository : IRepository<Keep>
   public Keep GetById(int keepId)
   {
     string sql = @"
-    SELECT keeps.*, COUNT(vaultKeeps.id) AS keepCount, accounts.*
+    SELECT keeps.*, COUNT(vaultKeeps.id) AS kept, accounts.*
     FROM keeps
     JOIN accounts On accounts.id = keeps.creatorId
     LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id

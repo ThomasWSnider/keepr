@@ -32,7 +32,8 @@ public class KeepsService
   internal Keep GetKeepById(int keepId)
   {
     Keep keep = _repository.GetById(keepId);
-    return keep ?? throw new Exception($"Could not find keep with the id of {keep.Id}");
+    if (keep == null || keep.Id == 0) throw new Exception($"Could not find keep with id of {keepId}");
+    return keep;
   }
 
   internal List<Keep> GetProfileKeeps(string profileId)

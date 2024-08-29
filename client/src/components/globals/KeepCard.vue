@@ -12,7 +12,7 @@ defineProps({ keep: [Kept, Keep], onProfile: Boolean })
 
 async function activateKeep(keep) {
   try {
-    await keepsService.activateKeep(keep, account.value.id)
+    await keepsService.activateKeep(keep, account.value?.id)
   } catch (error) {
     Pop.error(error);
   }
