@@ -41,6 +41,15 @@ public class KeepsService
     return keeps;
   }
 
+  internal Keep IncrementViews(int keepId, string userId)
+  {
+    Keep keep = GetKeepById(keepId);
+    if (userId == keep.CreatorId) return keep;
+    keep.Views++;
+    _repository.Update(keep);
+    return keep;
+  }
+
   internal Keep UpdateKeep(int keepId, Keep keepData, string userId)
   {
     Keep keepToUpdate = _repository.GetById(keepId);

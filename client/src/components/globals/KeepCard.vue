@@ -3,7 +3,6 @@ import { AppState } from "@/AppState";
 import { Keep } from "@/models/Keep";
 import { Kept } from "@/models/VaultKeep";
 import { keepsService } from "@/services/KeepsService";
-import { vaultKeepsService } from "@/services/VaultKeepsService";
 import Pop from "@/utils/Pop";
 import { computed } from "vue";
 
@@ -11,8 +10,12 @@ const account = computed(() => AppState.account)
 defineProps({ keep: [Kept, Keep], onProfile: Boolean })
 
 
-function activateKeep(keep) {
-  keepsService.activateKeep(keep)
+async function activateKeep(keep) {
+  try {
+    await keepsService.activateKeep(keep, account.value.id)
+  } catch (error) {
+    Pop.error(error);
+  }
 }
 
 async function destroyKeep(keepId) {

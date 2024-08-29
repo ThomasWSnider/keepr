@@ -4,8 +4,14 @@ import { AppState } from "@/AppState";
 
 class KeepsService{
   
-  activateKeep(keep){
+  async activateKeep(keep, accountId){
     AppState.activeKeep = null
+    await api.get(`api/keeps/${keep.id}`)
+    if (accountId == keep.creatorId){
+      AppState.activeKeep = keep
+      return
+    }
+    keep.views++
     AppState.activeKeep = keep
   }
 

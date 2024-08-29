@@ -42,9 +42,11 @@ public class KeepsRepository : IRepository<Keep>
   public List<Keep> GetAll()
   {
     string sql = @"
-    SELECT keeps.*, accounts.*
+    SELECT keeps.*, COUNT(vaultKeeps.id) AS keepCount, accounts.*
     FROM keeps
     JOIN accounts ON accounts.id = keeps.creatorId
+    LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
+    GROUP BY keeps.id
     ORDER BY keeps.createdAt DESC;";
 
     List<Keep> keeps = _db.Query<Keep, Profile, Keep>(sql, JoinCreator).ToList();
@@ -54,9 +56,10 @@ public class KeepsRepository : IRepository<Keep>
   public Keep GetById(int keepId)
   {
     string sql = @"
-    SELECT keeps.*, accounts.*
+    SELECT keeps.*, COUNT(vaultKeeps.id) AS keepCount, accounts.*
     FROM keeps
     JOIN accounts On accounts.id = keeps.creatorId
+    LEFT JOIN vaultKeeps ON vaultKeeps.keepId = keeps.id
     WHERE keeps.id = @keepId;";
 
     Keep keep = _db.Query<Keep, Profile, Keep>(sql, JoinCreator, new { keepId }).FirstOrDefault();
