@@ -5,6 +5,7 @@ import { Kept } from "@/models/VaultKeep";
 import { keepsService } from "@/services/KeepsService";
 import Pop from "@/utils/Pop";
 import { computed } from "vue";
+import Image from "./Image.vue";
 
 const account = computed(() => AppState.account)
 defineProps({ keep: [Kept, Keep], onProfile: Boolean })
@@ -37,15 +38,18 @@ async function destroyKeep(keepId) {
       class="mdi mdi-close-circle" :title="`Delete ${keep.name}`"></i>
     <div @click="activateKeep(keep)" :title="`View ${keep.name} details`" class="selectable" data-bs-toggle="modal"
       data-bs-target="#keepDetailsModal">
-      <img class=" img-fluid rounded shadow" :src="keep.img" :alt="keep.name" :title="`View ${keep.name}`">
+      <div :title="`View ${keep.name}`">
+        <Image :image="keep.img" :alt="keep.name" class="rounded shadow img-fluid" />
+      </div>
       <div class=" keep-flavor d-flex align-items-center justify-content-between">
         <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ keep.name }}</p>
       </div>
     </div>
     <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
       <div v-if="!onProfile" class="selectable creator-flavor">
-        <img class="img-fluid creator-img" :src="keep.creator.picture" :alt="keep.creator.name"
-          :title="`Go To ${keep.creator.name}'s profile page`">
+        <div :title="`Go To ${keep.creator.name}'s profile page`">
+          <Image :image="keep.creator.picture" :alt="keep.creator.name" class="creator-img" />
+        </div>
       </div>
     </RouterLink>
 
@@ -70,6 +74,7 @@ async function destroyKeep(keepId) {
 }
 
 .creator-img {
+  width: 6dvh;
   height: 6dvh;
   aspect-ratio: 1/1;
   border-radius: 50%;

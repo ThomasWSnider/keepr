@@ -5,6 +5,7 @@ import Pop from "@/utils/Pop";
 import { Modal } from "bootstrap";
 import { computed, ref } from "vue";
 import { useRoute } from "vue-router";
+import Image from "./Image.vue";
 
 const account = computed(() => AppState.account)
 const activeVault = computed(() => AppState.activeVault)
@@ -45,16 +46,16 @@ async function destroyVaultKeep(vaultKeepId) {
 <template>
   <div v-if="keep" class="modal-body ps-md-0 px-3 container-fluid pt-1 py-md-0 position-relative">
     <section class="row align-items-between">
-      <img class="img-fluid d-none d-md-block rounded-start keep-img" :src="keep.img" :alt="keep.name">
+      <Image class="img-fluid d-none d-md-block rounded-start keep-img" :image="keep.img" :alt="keep.name" />
       <div class="col-12 d-block d-md-none p-0 mobile-img">
-        <img class="img-fluid d-block d-md-none p-0 rounded-top" :src="keep.img" :alt="keep.name">
+        <Image class="img-fluid d-block d-md-none p-0 rounded-top" :image="keep.img" :alt="keep.name" />
       </div>
 
       <div class="col-md-6 col-12">
 
         <div class="d-flex keep-details flex-column justify-content-between m4-4 h-100">
 
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center mt-3">
             <p class="fw-semibold fs-5 mb-0 me-5 text-secondary" :title="`${keep.views} Views`"><i
                 class="mdi mdi-eye-outline"></i> {{ keep.views }}
             </p>
@@ -93,10 +94,9 @@ async function destroyVaultKeep(vaultKeepId) {
             </div>
 
             <div class="d-flex align-items-center justify-content-center">
-              <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
-                <img class="creator-img selectable me-1" :src="keep.creator.picture" :alt="keep.creator.name"
-                  :title="`Go to ${keep.creator.name}'s profile page`" data-bs-toggle="modal"
-                  data-bs-target="#keepDetailsModal">
+              <RouterLink :title="`Go to ${keep.creator.name}'s profile page`" data-bs-toggle="modal"
+                data-bs-target="#keepDetailsModal" :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
+                <Image class="creator-img selectable me-1" :image="keep.creator.picture" :alt="keep.creator.name" />
               </RouterLink>
               <p class="mb-0 fw-semibold d-md-none d-lg-block">{{ keep.creator.name }}</p>
             </div>
@@ -114,12 +114,6 @@ async function destroyVaultKeep(vaultKeepId) {
 
 
 <style lang="scss" scoped>
-.creator-img {
-  height: 5dvh;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-}
-
 .keep-img {
   min-height: 75dvh;
   max-height: 90dvh;
@@ -130,6 +124,13 @@ async function destroyVaultKeep(vaultKeepId) {
   @media screen and (max-width: 767.98px) {
     min-height: 50dvh;
   }
+}
+
+.creator-img {
+  width: 6dvh;
+  height: 6dvh;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
 }
 
 .keep-details {
@@ -154,6 +155,10 @@ async function destroyVaultKeep(vaultKeepId) {
     text-decoration: underline;
     filter: hue-rotate(330deg);
   }
+}
+
+.modal-body {
+  --bs-modal-padding: 0;
 }
 
 p {

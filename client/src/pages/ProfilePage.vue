@@ -6,7 +6,7 @@ import VaultCard from "@/components/globals/VaultCard.vue";
 import ModalWrapper from "@/components/ModalWrapper.vue";
 import { profilesService } from "@/services/ProfilesService";
 import Pop from "@/utils/Pop";
-import { computed, onMounted } from "vue";
+import { computed, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const profile = computed(() => AppState.focusedProfile)
@@ -14,11 +14,11 @@ const profileKeeps = computed(() => AppState.keeps)
 const profileVaults = computed(() => AppState.profileVaults)
 const route = useRoute()
 
-onMounted(() => {
+watch(() => route.params.profileId, () => {
   getProfileData()
   getProfileKeeps()
   getProfileVaults()
-})
+}, { immediate: true })
 
 async function getProfileData() {
   try {

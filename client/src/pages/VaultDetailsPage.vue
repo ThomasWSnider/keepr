@@ -5,7 +5,7 @@ import KeepDetails from "@/components/globals/KeepDetails.vue";
 import ModalWrapper from "@/components/ModalWrapper.vue";
 import { vaultsService } from "@/services/VaultsService";
 import Pop from "@/utils/Pop";
-import { computed, onMounted } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const vault = computed(() => AppState.activeVault)
