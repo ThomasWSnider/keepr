@@ -46,7 +46,7 @@ async function destroyVaultKeep(vaultKeepId) {
 <template>
   <div v-if="keep" class="modal-body ps-md-0 px-3 container-fluid pt-1 py-md-0 position-relative">
     <section class="row align-items-between">
-      <Image class="img-fluid d-none d-md-block rounded-start keep-img" :image="keep.img" :alt="keep.name" />
+      <Image class="img-fluid d-none d-md-block rounded-start keep-img p-0" :image="keep.img" :alt="keep.name" />
       <div class="col-12 d-block d-md-none p-0 mobile-img">
         <Image class="img-fluid d-block d-md-none p-0 rounded-top" :image="keep.img" :alt="keep.name" />
       </div>
