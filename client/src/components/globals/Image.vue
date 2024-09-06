@@ -13,7 +13,7 @@ function showImage() {
 
 <template>
   <div class="img-wrapper">
-    <img @load="showImage" height="10000px" width="305px" :class="{ 'opacity-0': !isLoaded, 'opacity-100': isLoaded }"
+    <img @load="showImage" height="750px" width="305px" :class="{ 'opacity-0': !isLoaded, 'opacity-100': isLoaded }"
       :src="image" :alt="alt">
   </div>
 </template>
