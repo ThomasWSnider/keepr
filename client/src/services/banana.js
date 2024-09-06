@@ -8,8 +8,8 @@ class VaultKeepsService {
     const keptIndex = AppState.keeps.findIndex((kept) => kept.id == vaultKeepId)
     AppState.keeps.splice(keptIndex, 1)
     return response.data
-    }
-  
+  }
+
   async saveKeep(vaultKeepData, keep) {
     vaultKeepData.keepId = keep.id
     await api.post(`api/vaultKeeps`, vaultKeepData)

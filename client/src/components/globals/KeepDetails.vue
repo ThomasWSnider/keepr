@@ -1,6 +1,6 @@
 <script setup>
 import { AppState } from "@/AppState";
-import { vaultKeepsService } from "@/services/VaultKeepsService";
+import { vaultKeepsService } from "@/services/banana";
 import Pop from "@/utils/Pop";
 import { Modal } from "bootstrap";
 import { computed, ref } from "vue";
