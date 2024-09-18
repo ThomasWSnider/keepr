@@ -45,13 +45,13 @@ async function destroyKeep(keepId) {
         <p class="fs-2 fw-bold text-light text-meriweather-bold">{{ keep.name }}</p>
       </div>
     </div>
-    <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
-      <div v-if="!onProfile" class="selectable creator-flavor">
+    <div v-if="!onProfile" class="selectable creator-flavor">
+      <RouterLink :to="{ name: 'Profile', params: { profileId: keep.creatorId } }">
         <div :title="`Go To ${keep.creator.name}'s profile page`">
-          <Image :image="keep.creator.picture" :alt="keep.creator.name" class="creator-img" />
+          <img :src="keep.creator.picture" :alt="keep.creator.name" class="creator-img">
         </div>
-      </div>
-    </RouterLink>
+      </RouterLink>
+    </div>
 
   </div>
 </template>
@@ -74,13 +74,15 @@ async function destroyKeep(keepId) {
 }
 
 .creator-img {
-  width: 6dvh;
-  height: 6dvh;
+  height: 3em;
   aspect-ratio: 1/1;
   border-radius: 50%;
 }
 
 .creator-flavor {
+  height: 3em;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
   position: absolute;
   bottom: 5px;
   right: 10px;

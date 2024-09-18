@@ -56,8 +56,8 @@ async function destroyVault(vaultId) {
       <div class="col-5 rounded vault-img shadow">
         <div class="row justify-content-center align-items-end h-100">
           <div class="col-10 px-0 text-center">
-            <p class="display-4 text-uppercase text-merriweather-bold text-light text-outline">{{ vault.name }}</p>
-            <p class="text-light fs-5 text-merriweather-bold">by {{ vault.creator.name }}</p>
+            <p class="display-4 text-uppercase text-light text-outline">{{ vault.name }}</p>
+            <p class="text-light fs-5">by {{ vault.creator.name }}</p>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ async function destroyVault(vaultId) {
       <div class="row justify-content-center mb-4">
         <div class="col-3 d-flex justify-content-center">
           <div class="text-center rounded-pill bg-secondary px-2">
-            <p class="text-merriweather fs-4 px-1 mb-0">{{ vaultKeeps.length }} {{ vaultKeeps.length == 1 ? "Keep" :
+            <p class="fs-4 px-1 mb-0">{{ vaultKeeps.length }} {{ vaultKeeps.length == 1 ? "Keep" :
               "Keeps" }}</p>
           </div>
         </div>
