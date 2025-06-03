@@ -50,4 +50,8 @@ async function logout() {
   </span>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+img {
+  aspect-ratio: 1/1;
+}
+</style>
